@@ -1,0 +1,19 @@
+{
+  "name": "testing-blockly",
+  "version": "0.0.2",
+  "description": "A blockly test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node update_blockly.js"
+  },
+  "repository": "https://github.com/darkwave/blockly-boilerplate",
+  "author": "Massimo Avvisati <massimo.avvisati@codemotion.it> (https://github.com/darkwave/blockly-boilerplate)",
+  "license": "GPL-3.0",
+  "keywords": [
+    "blockly",
+    "scratch",
+    "STEM",
+    "STEAM"
+  ]
+}
