@@ -1388,13 +1388,13 @@ Mate Values
 -------------------------------------------------------------------------------------------
 */
 
-Blockly.JavaScript['matevalues'] = function(block) {
-  // var text_entity_type = block.getFieldValue('type');
-  var code = `
-  EntityType.`+text_entity_type+`
-  `;
-  return code;
-};
+// Blockly.JavaScript['matevalues'] = function(block) {
+//   // var text_entity_type = block.getFieldValue('type');
+//   var code = `
+//   EntityType.`+text_entity_type+`
+//   `;
+//   return code;
+// };
 
 
 /*
