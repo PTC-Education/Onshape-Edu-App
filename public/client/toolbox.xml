@@ -435,8 +435,7 @@
   </category>
 
   <category name="Mate Test" colour="#745CA6">
-    <block type='matevalues'>
-    </block>
+    <block type='matevalues'></block>
   </category>
 
   <sep></sep>
