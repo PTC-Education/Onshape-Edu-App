@@ -4,15 +4,15 @@ const { get } = require("../../api");
 
 // Define app functions for defining block fields
 
-async function getMateNames() {
-    try {
-        const response = await fetch(`/api/getMates${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-        const mates = await response.json();
-        return mates['mateValues'];
-    } catch (error) {
-        console.error(error);
-    }
-};
+// async function getMateNames() {
+//     try {
+//         const response = await fetch(`/api/getMates${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+//         const mates = await response.json();
+//         return mates['mateValues'];
+//     } catch (error) {
+//         console.error(error);
+//     }
+// };
 
 /*
 WAIT:
