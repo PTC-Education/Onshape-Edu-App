@@ -1,5 +1,19 @@
 // Define you custom blocks
 
+const { get } = require("../../api");
+
+// Define app functions for defining block fields
+
+async function getMateNames() {
+    try {
+        const response = await fetch(`/api/getMates${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+        const mates = await response.json();
+        return mates['mateValues'];
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 /*
 WAIT:
 ----------------------------------------
@@ -1016,7 +1030,18 @@ Blockly.Blocks['vector3Field'] = {
 
 
 
-
+Blockly.Blocks['matevalues'] = {
+    init: function() {
+        this.appendValueInput("Position")
+            .setCheck(null)
+            .appendField("Select mate and set position (in radians)")
+            .appendField(new Blockly.FieldDropdown([getMateNames()]), "Mates");
+        this.setInputsInline(false);
+        this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+    }
+};
 
 
 

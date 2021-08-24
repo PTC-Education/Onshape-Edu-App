@@ -138,6 +138,17 @@ apiRouter.get('/elements/:eid/parts', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/parts/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.params.eid}`, req, res);
 });
 
+/**
+ * Get the mates in the current assembly.
+ * 
+ * GET /api/matevalues
+ *      -> 200, [ ...parts ]
+ *      -or-
+ *      -> 500, { error: '...' }
+ */
+ apiRouter.get('/getMates', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/assemblies/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.elementId}/matevalues`, req, res);
+});
 
 /**
  * Get the Parts of the current document/workspace.
