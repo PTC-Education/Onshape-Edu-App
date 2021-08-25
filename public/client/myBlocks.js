@@ -8,6 +8,29 @@
 // Main ID fetching function for generating IDs in Loops 
 
 
+/*
+--------------------------------------------------------------------------------------
+
+Get document info for block field definitions
+
+This section of code outlines the helper functions which get data from Onshape for 
+use in filling out fields
+
+--------------------------------------------------------------------------------------
+*/
+
+/*
+MateValues:
+--------------------------------------------------------------------------------------
+Adds a timed wait function. 
+--------------------------------------------------------------------------------------
+*/
+
+Blockly.JavaScript['matevalues'] = function(block) {
+  var seconds = Blockly.JavaScript.valueToCode(block, 'SECONDS', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'wait('+seconds+');\n';
+  return code;
+};
 
 /*
 --------------------------------------------------------------------------------------

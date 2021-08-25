@@ -1,6 +1,20 @@
 // Define you custom blocks
 
 /*
+Mate Values:
+----------------------------------------
+Input desired amount of seconds to wait 
+*/
+
+Blockly.JavaScript['matevalues'] = function(block) {
+    var dropdown_mates = block.getFieldValue('Mates');
+    var value_position = Blockly.JavaScript.valueToCode(block, 'Position', Blockly.JavaScript.ORDER_ATOMIC);
+    // TODO: Assemble JavaScript into code variable.
+    var code = '...;\n';
+    return code;
+};
+
+/*
 WAIT:
 ----------------------------------------
 Input desired amount of seconds to wait 
