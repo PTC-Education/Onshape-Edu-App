@@ -19,6 +19,13 @@ const apiRouter = require('express').Router();
 });
 
 /**
+ * Get MateValues from Assembly 
+ */
+ apiRouter.get('/getMateValues', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/assemblies/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.elementId}/matevalues`, req, res);
+});
+
+/**
  * Get the Elements of the current document/workspace.
  * 
  * GET /api/elements
@@ -52,7 +59,7 @@ apiRouter.get('/users/sessioninfo', (req, res) => {
 
 
 /**
- * Get all Feature Studio elements from the document 
+ * Get AppElements from the document 
  */
  apiRouter.get('/getApplicationStorage', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${req.query.documentId}/w/${req.query.workspaceId}/elements?elementType=APPLICATION&withThumbnails=false`, req, res);
