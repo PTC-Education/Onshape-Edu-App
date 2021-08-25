@@ -27,8 +27,8 @@ Adds a timed wait function.
 */
 
 Blockly.JavaScript['matevalues'] = function(block) {
-  var seconds = Blockly.JavaScript.valueToCode(block, 'SECONDS', Blockly.JavaScript.ORDER_ATOMIC);
-  var code = 'wait('+seconds+');\n';
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
   return code;
 };
 

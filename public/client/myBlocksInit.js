@@ -19,16 +19,16 @@ async function getMates() {
 var mates = getMates();
 console.log('mates = '+mates)
 
-function getMateNames() {
-    var mates = getMates();
-    var names = [];
-    for (let i = 0;i<mates['mateValues'].len;i++) {
-        names.push(mates['mateValues'][i]['mateName'])
-    };
-    return names;
-}
-var mateNames = getMateNames();
-console.log('names = '+mateNames)
+// function getMateNames() {
+//     var mates = getMates();
+//     var names = [];
+//     for (let i = 0;i<mates['mateValues'].len;i++) {
+//         names.push(mates['mateValues'][i]['mateName'])
+//     };
+//     return names;
+// }
+// var mateNames = getMateNames();
+// console.log('names = '+mateNames)
 
 Blockly.Blocks['matevalues'] = {
     init: function() {
