@@ -6,7 +6,7 @@ Mate Values:
 Input desired amount of seconds to wait 
 */
 
-async function getFeatureList() {
+async function getMates() {
     try {
         const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
         const featurestudios = await response.json();
@@ -16,8 +16,19 @@ async function getFeatureList() {
     }
 };
 
-var mates = getFeatureList();
+var mates = await getMates();
 console.log('mates = '+mates)
+
+function getMateNames() {
+    var mates = await getMates();
+    var names = [];
+    for (let i = 0;i<mates['mateValues'].len;i++) {
+        names.push(mates['mateValues'][i]['mateName'])
+    };
+    return names;
+}
+var mateNames = getMateNames();
+console.log('names = '+mateNames)
 
 Blockly.Blocks['matevalues'] = {
     init: function() {

@@ -170,4 +170,4 @@ async function updateJSONTree(applicationID, changeID, blocklyXML) {
     } catch (error) {
         console.error(error);
     }
-  };
+};
