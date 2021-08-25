@@ -6,12 +6,17 @@ Mate Values:
 Input desired amount of seconds to wait 
 */
 
-Blockly.JavaScript['matevalues'] = function(block) {
-    var dropdown_mates = block.getFieldValue('Mates');
-    var value_position = Blockly.JavaScript.valueToCode(block, 'Position', Blockly.JavaScript.ORDER_ATOMIC);
-    // TODO: Assemble JavaScript into code variable.
-    var code = '...;\n';
-    return code;
+Blockly.Blocks['matevalues'] = {
+    init: function() {
+      this.appendValueInput("Position")
+          .setCheck(null)
+          .appendField("Select mate and set position (in radians)")
+          .appendField(new Blockly.FieldDropdown([["option1","foo"], ["option2","bar"], ["option3","OPTIONNAME"]]), "Mates");
+      this.setInputsInline(false);
+      this.setColour(230);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
 };
 
 /*
