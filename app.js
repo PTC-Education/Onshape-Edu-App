@@ -36,7 +36,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        name: 'app-onshape-edu',
+        name: 'app-blockly-onshape',
         sameSite: 'none',
         secure: true,
         httpOnly: true,
@@ -83,10 +83,6 @@ app.get('/grantDenied', (req, res) => {
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'));
-});
-
-app.get('/home', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'html', 'home.html'));
 });
 
 app.use('/api', require('./api'));

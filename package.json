@@ -1,13 +1,13 @@
 {
-  "name": "app-onshape-edu",
+  "name": "app-blocky-onshape",
   "version": "0.1.0",
-  "description": "A sandbox for playing around with new edu apps.",
+  "description": "A sample app to view glTF files exported from OnShape.",
   "main": "bin/www",
   "scripts": {
     "start": "bin/www",
     "postinstall": "cd public/client && node ./update_blockly.js"
   },
-  "author": "Matt Mueller and PTC Edu Team <edutech@ptc.com>",
+  "author": "Ron Gajdos <rgajdos@ptc.com>",
   "license": "MIT",
   "dependencies": {
     "connect-redis": "^5.0.0",

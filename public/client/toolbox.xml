@@ -433,10 +433,6 @@
     <block type='sweep'></block>
     <block type='loft'></block>
   </category>
-<!-- 
-  <category name="Mate Test" colour="#745CA6">
-    <block type='matevalues'></block>
-  </category> -->
 
   <sep></sep>
 </xml>
