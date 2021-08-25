@@ -16,11 +16,11 @@ async function getMates() {
     }
 };
 
-var mates = await getMates();
+var mates = getMates();
 console.log('mates = '+mates)
 
 function getMateNames() {
-    var mates = await getMates();
+    var mates = getMates();
     var names = [];
     for (let i = 0;i<mates['mateValues'].len;i++) {
         names.push(mates['mateValues'][i]['mateName'])
