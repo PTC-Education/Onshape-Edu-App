@@ -434,5 +434,9 @@
     <block type='loft'></block>
   </category>
 
+  <category name="Assemblies" colour="#745CA6">
+    <block type='matevalues'></block>
+  </category>
+
   <sep></sep>
 </xml>
