@@ -16,7 +16,7 @@ async function getMates() {
     }
 };
 
-var mates = getMates();
+var mates = await getMates();
 console.log('mates = '+mates)
 
 // function getMateNames() {
