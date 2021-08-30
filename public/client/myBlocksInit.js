@@ -30,14 +30,22 @@ get mate values from assembly
 // var mateNames = getMateNames();
 // console.log('names = '+mateNames)
 
-function optionGen(array){
-    var options = [];
-    for(let i = 0; i < array.length; i++) {
-        // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
-        options[i] = [JSON.stringify(array[i].mateName),JSON.stringify(array[i].mateName).toUpperCase()];
-    };
-    return options;
-};
+// function optionGen(array){
+//     var options = [];
+//     for(let i = 0; i < array.length; i++) {
+//         // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
+//         options[i] = [JSON.stringify(array[i].mateName),JSON.stringify(array[i].mateName).toUpperCase()];
+//     };
+//     return options;
+// };
+
+function resolveAfter1Second() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    });
+  }
 
 Blockly.Blocks['matevalues'] = {
     init: function() {
@@ -53,17 +61,18 @@ Blockly.Blocks['matevalues'] = {
 
     generateOptions: async function() {
         try {
-            // let options = [];
+            var options = [];
             const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
             const matevalues = await response.json()
-            // for(let i = 0; i < matevalues.mateValues.length; i++) {
-            //     // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
-            //     options[i] = [JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
-            //     console.log("options array" + options)
-            //   };
-            //   console.log("options array" + options)
-            console.log(optionGe(matevalues.mateValues));
-            return optionGen(matevalues.mateValues);
+            for(let i = 0; i < matevalues.mateValues.length; i++) {
+                // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
+                options[i] = [JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
+                console.log("options array" + options)
+            };
+            const delay = await resolveAfter1Second();
+            console.log("options array" + options)
+            // console.log('options: '+optionGen(matevalues.mateValues));
+            return options;
         } catch (error) {
             console.error(error);
         }
