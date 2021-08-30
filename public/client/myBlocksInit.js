@@ -5,7 +5,7 @@ Mate Values:
 ----------------------------------------
 get mate values from assembly
 */
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 async function getMates() {
     try {
