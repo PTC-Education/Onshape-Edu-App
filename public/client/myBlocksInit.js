@@ -6,29 +6,46 @@ Mate Values:
 get mate values from assembly
 */
 
-Blockly.Blocks['dynamic_dropdown'] = {
-    init: function() {
-      var input = this.appendDummyInput()
-        .appendField('day')
-        .appendField(new Blockly.FieldDropdown(
-          this.generateOptions), 'DAY');
-    },
+// Blockly.Blocks['dynamic_dropdown'] = {
+//     init: function() {
+//       var input = this.appendDummyInput()
+//         .appendField('day')
+//         .appendField(new Blockly.FieldDropdown(
+//           this.generateOptions), 'DAY');
+//     },
   
-    generateOptions: async function() {
-        var options = [];
-        const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-        const matevalues = await response.json()
-        for(let i = 0; i < matevalues.mateValues.length; i++) {
-            // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
-            options[i] = [JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
-            console.log("options array" + options)
-        };
-        const delay = await resolveAfter1Second();
+//     generateOptions: function() {
+//         var options = [];
+//         const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+//         const matevalues = await response.json()
+//         for(let i = 0; i < matevalues.mateValues.length; i++) {
+//             // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
+//             options[i] = [JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
+//             console.log("options array" + options)
+//         };
+//         const delay = await resolveAfter1Second();
+//         console.log("options array" + options)
+//         // console.log('options: '+optionGen(matevalues.mateValues));
+//         return await resolveAfter1Second(options);
+//     }
+// };
+
+const genOptionsArray = async function() {
+    var options = [];
+    const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+    const matevalues = await response.json()
+    for(let i = 0; i < matevalues.mateValues.length; i++) {
+        // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
+        options[i] = [JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
         console.log("options array" + options)
-        // console.log('options: '+optionGen(matevalues.mateValues));
-        return await resolveAfter1Second(options);
-    }
+    };
+    const delay = await resolveAfter1Second();
+    console.log("options array" + options)
+    // console.log('options: '+optionGen(matevalues.mateValues));
+    return await resolveAfter1Second(options);
 };
+
+var optArray = genOptionsArray;
 
 function resolveAfter1Second(x) {
     return new Promise(resolve => {
@@ -43,27 +60,28 @@ Blockly.Blocks['matevalues'] = {
       this.appendValueInput("Position")
           .setCheck(null)
           .appendField("Select mate and set position (in radians)")
-          .appendField(new Blockly.FieldDropdown(this.generateOptions), "Mates");
+          .appendField(new Blockly.FieldDropdown(optArray), "Mates");
       this.setInputsInline(false);
       this.setColour(230);
    this.setTooltip("");
    this.setHelpUrl("");
-    },
-
-    generateOptions: async function() {
-        var options = [];
-        const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-        const matevalues = await response.json()
-        for(let i = 0; i < matevalues.mateValues.length; i++) {
-            // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
-            options[i] = [JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
-            console.log("options array" + options)
-        };
-        const delay = await resolveAfter1Second();
-        console.log("options array" + options)
-        // console.log('options: '+optionGen(matevalues.mateValues));
-        return await resolveAfter1Second(options);
     }
+    // ,
+
+    // generateOptions: async function() {
+    //     var options = [];
+    //     const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+    //     const matevalues = await response.json()
+    //     for(let i = 0; i < matevalues.mateValues.length; i++) {
+    //         // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
+    //         options[i] = [JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
+    //         console.log("options array" + options)
+    //     };
+    //     const delay = await resolveAfter1Second();
+    //     console.log("options array" + options)
+    //     // console.log('options: '+optionGen(matevalues.mateValues));
+    //     return await resolveAfter1Second(options);
+    // }
 };
 
 /*
