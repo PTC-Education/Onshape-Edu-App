@@ -30,6 +30,18 @@ get mate values from assembly
 // var mateNames = getMateNames();
 // console.log('names = '+mateNames)
 
+// function optionGen(array){
+//     new Promise(resolve) => {
+//         var options = [];
+//         for(var i = 0; i < array.length; i++) {
+//             // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
+//             options[i] = [JSON.stringify(array[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
+//         }
+//         resolve(options)
+//     }
+    
+// }
+
 Blockly.Blocks['matevalues'] = {
     init: function() {
       this.appendValueInput("Position")
@@ -42,16 +54,16 @@ Blockly.Blocks['matevalues'] = {
    this.setHelpUrl("");
     },
 
-    generateOptions: function() {
+    generateOptions: async function() {
         try {
             var options = [];
             const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-            const matevalues = await response.json();
-            for(var i = 0; i < matevalues.mateValues.length; i++) {
+            const matevalues = await response.json()
+            for(let i = 0; i < matevalues.mateValues.length; i++) {
                 // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
                 options[i] = [JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
                 console.log("options array" + options)
-              }
+              };
             return options;
         } catch (error) {
             console.error(error);
