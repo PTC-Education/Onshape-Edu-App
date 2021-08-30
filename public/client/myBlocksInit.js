@@ -15,14 +15,18 @@ Blockly.Blocks['dynamic_dropdown'] = {
     },
   
     generateOptions: function() {
-      var options = [];
-      var now = Date.now();
-      for(var i = 0; i < 7; i++) {
-        var dateString = String(new Date(now)).substring(0, 3);
-        options.push([dateString, dateString.toUpperCase()]);
-        now += 24 * 60 * 60 * 1000;
-      }
-      return options;
+        var options = [];
+        const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+        const matevalues = await response.json()
+        for(let i = 0; i < matevalues.mateValues.length; i++) {
+            // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
+            options[i] = [JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
+            console.log("options array" + options)
+        };
+        const delay = await resolveAfter1Second();
+        console.log("options array" + options)
+        // console.log('options: '+optionGen(matevalues.mateValues));
+        return await resolveAfter1Second(options);
     }
 };
 
@@ -46,23 +50,19 @@ Blockly.Blocks['matevalues'] = {
    this.setHelpUrl("");
     },
 
-    generateOptions: async function() {
-        try {
-            var options = [];
-            const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-            const matevalues = await response.json()
-            for(let i = 0; i < matevalues.mateValues.length; i++) {
-                // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
-                options[i] = [JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
-                console.log("options array" + options)
-            };
-            const delay = await resolveAfter1Second();
+    generateOptions: function() {
+        var options = [];
+        const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+        const matevalues = await response.json()
+        for(let i = 0; i < matevalues.mateValues.length; i++) {
+            // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
+            options[i] = [JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
             console.log("options array" + options)
-            // console.log('options: '+optionGen(matevalues.mateValues));
-            return await resolveAfter1Second(options);
-        } catch (error) {
-            console.error(error);
-        }
+        };
+        const delay = await resolveAfter1Second();
+        console.log("options array" + options)
+        // console.log('options: '+optionGen(matevalues.mateValues));
+        return await resolveAfter1Second(options);
     }
 };
 
