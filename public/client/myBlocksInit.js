@@ -35,12 +35,21 @@ Blockly.Blocks['matevalues'] = {
       this.appendValueInput("Position")
           .setCheck(null)
           .appendField("Select mate and set position (in radians)")
-          .appendField(new Blockly.FieldDropdown([["option1","foo"], ["option2","bar"], ["option3","OPTIONNAME"]]), "Mates");
+          .appendField(new Blockly.FieldDropdown(this.generateOptions), "Mates");
       this.setInputsInline(false);
       this.setColour(230);
    this.setTooltip("");
    this.setHelpUrl("");
-    }
+    },
+
+    generateOptions: function() {
+        var options = [];
+        var mates = getMates();
+        for(var i = 0; i < mates.matevalues.length; i++) {
+          options.push(JSON.stringify(mates.mateValues[i].mateName));
+        }
+        return options;
+      }
 };
 
 /*
