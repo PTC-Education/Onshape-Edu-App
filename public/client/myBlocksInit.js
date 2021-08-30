@@ -7,7 +7,7 @@ get mate values from assembly
 */
 const fetch = require('node-fetch');
 
-function getMates() {
+async function getMates() {
     try {
         const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
         const featurestudios = await response.json();
