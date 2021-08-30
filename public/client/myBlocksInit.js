@@ -3,22 +3,22 @@
 /*
 Mate Values:
 ----------------------------------------
-Input desired amount of seconds to wait 
+get mate values from assembly
 */
-// const fetch = require('node-fetch');
+const fetch = require('node-fetch');
 
-// function getMates() {
-//     try {
-//         const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-//         const featurestudios = await response.json();
-//         return featurestudios;
-//     } catch (error) {
-//         console.error(error);
-//     }
-// };
+function getMates() {
+    try {
+        const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+        const featurestudios = await response.json();
+        return featurestudios;
+    } catch (error) {
+        console.error(error);
+    }
+};
 
-// var mates = getMates();
-// console.log('mates = '+mates)
+var mates = getMates();
+console.log('mates = '+mates)
 
 // function getMateNames() {
 //     var mates = getMates();
