@@ -6,38 +6,25 @@ Mate Values:
 get mate values from assembly
 */
 
-// async function getMates() {
-//     try {
-//         const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-//         const featurestudios = await response.json();
-//         return featurestudios;
-//     } catch (error) {
-//         console.error(error);
-//     }
-// };
-
-// var mates = getMates();
-// console.log('mates = '+mates)
-
-// function getMateNames() {
-//     var mates = getMates();
-//     var names = [];
-//     for (let i = 0;i<mates['mateValues'].len;i++) {
-//         names.push(mates['mateValues'][i]['mateName'])
-//     };
-//     return names;
-// }
-// var mateNames = getMateNames();
-// console.log('names = '+mateNames)
-
-// function optionGen(array){
-//     var options = [];
-//     for(let i = 0; i < array.length; i++) {
-//         // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
-//         options[i] = [JSON.stringify(array[i].mateName),JSON.stringify(array[i].mateName).toUpperCase()];
-//     };
-//     return options;
-// };
+Blockly.Blocks['dynamic_dropdown'] = {
+    init: function() {
+      var input = this.appendDummyInput()
+        .appendField('day')
+        .appendField(new Blockly.FieldDropdown(
+          this.generateOptions), 'DAY');
+    },
+  
+    generateOptions: function() {
+      var options = [];
+      var now = Date.now();
+      for(var i = 0; i < 7; i++) {
+        var dateString = String(new Date(now)).substring(0, 3);
+        options.push([dateString, dateString.toUpperCase()]);
+        now += 24 * 60 * 60 * 1000;
+      }
+      return options;
+    }
+};
 
 function resolveAfter1Second() {
     return new Promise(resolve => {
@@ -59,7 +46,7 @@ Blockly.Blocks['matevalues'] = {
    this.setHelpUrl("");
     },
 
-    generateOptions: async function() {
+    generateOptions: function() {
         try {
             var options = [];
             const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
