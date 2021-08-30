@@ -14,14 +14,14 @@ const apiRouter = require('express').Router();
  * Add Custom Feature to the Feature List 
  */
 
- apiRouter.post('/createAppElement', (req, res) => {
+apiRouter.post('/createAppElement', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/appelements/d/${req.query.documentId}/w/${req.query.workspaceId}`, req, res);
 });
 
 /**
  * Get MateValues from Assembly 
  */
- apiRouter.get('/getMateValues', (req, res) => {
+apiRouter.get('/getMateValues', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/assemblies/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.elementId}/matevalues`, req, res);
 });
 
