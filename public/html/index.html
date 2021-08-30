@@ -68,6 +68,7 @@
 <script src="../appStorage.js" charset="utf-8"></script>
 <script src="../appFeatureList.js" charset="utf-8"></script>
 <script src="../appExportStudio.js" charset="utf-8"></script>
+<script src="../appAssembly.js" charset="utf-8"></script>
 
 <script>
 
@@ -77,6 +78,7 @@ getAppElementInfo()
   .then((value) => getChangeID(value.applicationID)
   .then((value) => Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(value.tree.blockly), Blockly.mainWorkspace)));
 
+// var mates = getMates()
 
 async function runCode(highlighting) {
   // Change the color of the button to indicate the process running
