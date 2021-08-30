@@ -34,7 +34,7 @@ function optionGen(array){
     var options = [];
     for(var i = 0; i < array.length; i++) {
         // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
-        options[i] = [JSON.stringify(array[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
+        options[i] = [JSON.stringify(array[i].mateName),JSON.stringify(array[i].mateName).toUpperCase()];
     };
     return options;
 };
