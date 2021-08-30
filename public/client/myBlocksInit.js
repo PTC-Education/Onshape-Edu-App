@@ -5,20 +5,19 @@ Mate Values:
 ----------------------------------------
 get mate values from assembly
 */
-import fetch from 'node-fetch';
 
-async function getMates() {
-    try {
-        const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-        const featurestudios = await response.json();
-        return featurestudios;
-    } catch (error) {
-        console.error(error);
-    }
-};
+// async function getMates() {
+//     try {
+//         const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+//         const featurestudios = await response.json();
+//         return featurestudios;
+//     } catch (error) {
+//         console.error(error);
+//     }
+// };
 
-var mates = getMates();
-console.log('mates = '+mates)
+// var mates = getMates();
+// console.log('mates = '+mates)
 
 // function getMateNames() {
 //     var mates = getMates();
