@@ -48,6 +48,7 @@ Blockly.Blocks['matevalues'] = {
             const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
             const matevalues = await response.json();
             for(var i = 0; i < matevalues.mateValues.length; i++) {
+                console.log(JSON.stringify(matevalues.mateValues[i].mateName))
                 options.push(JSON.stringify(matevalues.mateValues[i].mateName));
               }
             return options;
