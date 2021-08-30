@@ -14,7 +14,7 @@ Blockly.Blocks['dynamic_dropdown'] = {
           this.generateOptions), 'DAY');
     },
   
-    generateOptions: function() {
+    generateOptions: async function() {
         var options = [];
         const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
         const matevalues = await response.json()
