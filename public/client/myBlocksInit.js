@@ -62,7 +62,7 @@ Blockly.Blocks['matevalues'] = {
             //     console.log("options array" + options)
             //   };
             //   console.log("options array" + options)
-            return optionGen(mateValues);
+            return optionGen(matevalues.mateValues);
         } catch (error) {
             console.error(error);
         }
