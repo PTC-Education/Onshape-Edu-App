@@ -36,7 +36,7 @@ function resolveAfter1Second(x) {
         resolve(x);
       }, 1000);
     });
-  }
+};
 
 Blockly.Blocks['matevalues'] = {
     init: function() {
@@ -50,7 +50,7 @@ Blockly.Blocks['matevalues'] = {
    this.setHelpUrl("");
     },
 
-    generateOptions: function() {
+    generateOptions: async function() {
         var options = [];
         const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
         const matevalues = await response.json()
