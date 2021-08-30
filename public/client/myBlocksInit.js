@@ -26,10 +26,10 @@ Blockly.Blocks['dynamic_dropdown'] = {
     }
 };
 
-function resolveAfter1Second() {
+function resolveAfter1Second(x) {
     return new Promise(resolve => {
       setTimeout(() => {
-        resolve();
+        resolve(x);
       }, 1000);
     });
   }
@@ -59,7 +59,7 @@ Blockly.Blocks['matevalues'] = {
             const delay = await resolveAfter1Second();
             console.log("options array" + options)
             // console.log('options: '+optionGen(matevalues.mateValues));
-            return options;
+            return await resolveAfter1Second(options);
         } catch (error) {
             console.error(error);
         }
