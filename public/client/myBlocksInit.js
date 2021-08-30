@@ -6,7 +6,7 @@ Mate Values:
 Input desired amount of seconds to wait 
 */
 
-async function getMates() {
+function getMates() {
     try {
         const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
         const featurestudios = await response.json();
@@ -16,7 +16,7 @@ async function getMates() {
     }
 };
 
-var mates = await getMates();
+var mates = getMates();
 console.log('mates = '+mates)
 
 // function getMateNames() {
