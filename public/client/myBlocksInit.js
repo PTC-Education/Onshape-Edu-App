@@ -42,14 +42,19 @@ Blockly.Blocks['matevalues'] = {
    this.setHelpUrl("");
     },
 
-    generateOptions: function() {
-        var options = [];
-        var mates = getMates();
-        for(var i = 0; i < mates.matevalues.length; i++) {
-          options.push(JSON.stringify(mates.mateValues[i].mateName));
+    generateOptions: async function() {
+        try {
+            var options = [];
+            const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+            const matevalues = await response.json();
+            for(var i = 0; i < matevalues.mateValues.length; i++) {
+                options.push(JSON.stringify(matevalues.mateValues[i].mateName));
+              }
+            return options;
+        } catch (error) {
+            console.error(error);
         }
-        return options;
-      }
+    }
 };
 
 /*
