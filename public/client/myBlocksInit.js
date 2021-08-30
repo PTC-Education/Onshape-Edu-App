@@ -32,7 +32,7 @@ get mate values from assembly
 
 function optionGen(array){
     var options = [];
-    for(var i = 0; i < array.length; i++) {
+    for(let i = 0; i < array.length; i++) {
         // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
         options[i] = [JSON.stringify(array[i].mateName),JSON.stringify(array[i].mateName).toUpperCase()];
     };
@@ -62,6 +62,7 @@ Blockly.Blocks['matevalues'] = {
             //     console.log("options array" + options)
             //   };
             //   console.log("options array" + options)
+            console.log(optionGe(matevalues.mateValues));
             return optionGen(matevalues.mateValues);
         } catch (error) {
             console.error(error);
