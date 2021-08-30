@@ -78,8 +78,8 @@ getAppElementInfo()
   .then((value) => getChangeID(value.applicationID)
   .then((value) => Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(value.tree.blockly), Blockly.mainWorkspace)));
 
-var mates = getMates()
-console.log('matevals = '+mates)
+getMates()
+  .then((value) => console.log('matevals = '+value))
 
 async function runCode(highlighting) {
   // Change the color of the button to indicate the process running
