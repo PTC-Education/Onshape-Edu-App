@@ -30,17 +30,14 @@ get mate values from assembly
 // var mateNames = getMateNames();
 // console.log('names = '+mateNames)
 
-// function optionGen(array){
-//     new Promise(resolve) => {
-//         var options = [];
-//         for(var i = 0; i < array.length; i++) {
-//             // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
-//             options[i] = [JSON.stringify(array[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
-//         }
-//         resolve(options)
-//     }
-    
-// }
+function optionGen(array){
+    var options = [];
+    for(var i = 0; i < array.length; i++) {
+        // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
+        options[i] = [JSON.stringify(array[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
+    };
+    return options;
+};
 
 Blockly.Blocks['matevalues'] = {
     init: function() {
@@ -56,15 +53,16 @@ Blockly.Blocks['matevalues'] = {
 
     generateOptions: async function() {
         try {
-            var options = [];
+            // let options = [];
             const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
             const matevalues = await response.json()
-            for(let i = 0; i < matevalues.mateValues.length; i++) {
-                // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
-                options[i] = [JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
-                console.log("options array" + options)
-              };
-            return options;
+            // for(let i = 0; i < matevalues.mateValues.length; i++) {
+            //     // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
+            //     options[i] = [JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
+            //     console.log("options array" + options)
+            //   };
+            //   console.log("options array" + options)
+            return optionGen(mateValues);
         } catch (error) {
             console.error(error);
         }
