@@ -46,7 +46,7 @@ Blockly.Blocks['matevalues'] = {
    this.setHelpUrl("");
     },
 
-    generateOptions: function() {
+    generateOptions: async function() {
         try {
             var options = [];
             const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })

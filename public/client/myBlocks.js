@@ -26,6 +26,12 @@ Adds a timed wait function.
 --------------------------------------------------------------------------------------
 */
 
+Blockly.JavaScript['dynamic_dropdown'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
+
 Blockly.JavaScript['matevalues'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
   var code = '...;\n';
