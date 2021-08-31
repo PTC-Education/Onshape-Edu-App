@@ -36,7 +36,7 @@ const genOptionsArray = async function() {
     const matevalues = await response.json()
     for(let i = 0; i < matevalues.mateValues.length; i++) {
         // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
-        options[i] = [JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()];
+        options.push([JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()]);
         console.log("options array" + options)
     };
     const delay = await resolveAfter1Second();
@@ -45,7 +45,7 @@ const genOptionsArray = async function() {
     return await resolveAfter1Second(options);
 };
 
-var optArray = genOptionsArray;
+const optArray = genOptionsArray();
 
 function resolveAfter1Second(x) {
     return new Promise(resolve => {
@@ -65,6 +65,7 @@ Blockly.Blocks['matevalues'] = {
       this.setColour(230);
    this.setTooltip("");
    this.setHelpUrl("");
+   console.log('optarray ='+optArray);
     }
     // ,
 
