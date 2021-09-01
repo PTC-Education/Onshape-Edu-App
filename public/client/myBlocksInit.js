@@ -58,7 +58,7 @@ const genOptionsArray = async function() {
     const matevalues = await response.json()
     for(let i = 0; i < matevalues.mateValues.length; i++) {
         // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
-        options.push([JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()]);
+        options.push([matevalues.mateValues[i].mateName,matevalues.mateValues[i].mateName.toUpperCase()]);
         // console.log(options)
     };
     const delay = await resolveAfter1Second(10);
