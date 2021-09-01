@@ -14,7 +14,7 @@ Blockly.Blocks['dynamic_dropdown'] = {
           this.generateOptions), 'DAY');
     },
   
-    generateOptions: async function() {
+    generateOptions: function() {
       var options = [];
       var now = Date.now();
       for(var i = 0; i < 7; i++) {
@@ -23,6 +23,7 @@ Blockly.Blocks['dynamic_dropdown'] = {
         now += 24 * 60 * 60 * 1000;
       }
       console.log(options);
+      console.log(typeof(options));
       return options;
     }
 };
