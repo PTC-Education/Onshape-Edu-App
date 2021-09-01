@@ -87,7 +87,9 @@ Blockly.Blocks['matevalues'] = {
       this.appendValueInput("Position")
           .setCheck(null)
           .appendField("Select mate and set position (in radians)")
-          .appendField(new Blockly.FieldDropdown(optArray), "Mates");
+          .appendField(new Blockly.FieldDropdown(genOptionsArray().then(result => {
+            return result;
+        })), "Mates");
       this.setInputsInline(false);
       this.setColour(230);
    this.setTooltip("");
