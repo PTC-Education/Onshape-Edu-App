@@ -79,14 +79,11 @@ function resolveAfter1Second(x) {
 
 Blockly.Blocks['matevalues'] = {
     init: function() {
-    var optArray;
     genOptionsArray().then(result =>
       {this.appendValueInput("Position")
           .setCheck(null)
           .appendField("Select mate and set position (in radians)")
-          .appendField(new Blockly.FieldDropdown(genOptionsArray().then(result => {
-            return result;
-        })), "Mates");});
+          .appendField(new Blockly.FieldDropdown(result), "Mates");});
       this.setInputsInline(false);
       this.setColour(230);
    this.setTooltip("");
