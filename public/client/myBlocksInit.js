@@ -79,7 +79,9 @@ function resolveAfter1Second(x) {
 
 Blockly.Blocks['matevalues'] = {
     init: function() {
-    console.log(genOptionsArray());
+    genOptionsArray().then(result => {
+        console.log(result);
+    });
       this.appendValueInput("Position")
           .setCheck(null)
           .appendField("Select mate and set position (in radians)")
