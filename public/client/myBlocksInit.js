@@ -6,6 +6,26 @@ Mate Values:
 get mate values from assembly
 */
 
+Blockly.Blocks['dynamic_dropdown'] = {
+    init: function() {
+      var input = this.appendDummyInput()
+        .appendField('day')
+        .appendField(new Blockly.FieldDropdown(
+          this.generateOptions), 'DAY');
+    },
+  
+    generateOptions: function() {
+      var options = [];
+      var now = Date.now();
+      for(var i = 0; i < 7; i++) {
+        var dateString = String(new Date(now)).substring(0, 3);
+        options.push([dateString, dateString.toUpperCase()]);
+        now += 24 * 60 * 60 * 1000;
+      }
+      return options;
+    }
+};
+
 // Blockly.Blocks['dynamic_dropdown'] = {
 //     init: function() {
 //       var input = this.appendDummyInput()
@@ -39,10 +59,10 @@ const genOptionsArray = async function() {
         options.push([JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()]);
         console.log("options array" + options)
     };
-    const delay = await resolveAfter1Second();
+    const delay = await resolveAfter1Second(10);
     console.log("options array" + options)
     // console.log('options: '+optionGen(matevalues.mateValues));
-    return await resolveAfter1Second(options);
+    return options;
 };
 
 const optArray = genOptionsArray();
@@ -57,6 +77,7 @@ function resolveAfter1Second(x) {
 
 Blockly.Blocks['matevalues'] = {
     init: function() {
+    console.log('optarray ='+optArray);
       this.appendValueInput("Position")
           .setCheck(null)
           .appendField("Select mate and set position (in radians)")
@@ -65,8 +86,8 @@ Blockly.Blocks['matevalues'] = {
       this.setColour(230);
    this.setTooltip("");
    this.setHelpUrl("");
-   console.log('optarray ='+optArray);
-    }
+   
+}
     // ,
 
     // generateOptions: async function() {
