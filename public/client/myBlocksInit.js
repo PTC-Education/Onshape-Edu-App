@@ -67,7 +67,7 @@ var genOptionsArray = async function() {
     return options;
 };
 
-var optArray = genOptionsArray();
+// var optArray = genOptionsArray();
 
 function resolveAfter1Second(x) {
     return new Promise(resolve => {
@@ -79,13 +79,15 @@ function resolveAfter1Second(x) {
 
 Blockly.Blocks['matevalues'] = {
     init: function() {
+    var optArray;
     genOptionsArray().then(result => {
+        optArray = result;
         console.log(result);
     });
       this.appendValueInput("Position")
           .setCheck(null)
           .appendField("Select mate and set position (in radians)")
-          .appendField(new Blockly.FieldDropdown(genOptionsArray()), "Mates");
+          .appendField(new Blockly.FieldDropdown(optArray), "Mates");
       this.setInputsInline(false);
       this.setColour(230);
    this.setTooltip("");
