@@ -59,10 +59,10 @@ const genOptionsArray = async function() {
     for(let i = 0; i < matevalues.mateValues.length; i++) {
         // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
         options.push([JSON.stringify(matevalues.mateValues[i].mateName),JSON.stringify(matevalues.mateValues[i].mateName).toUpperCase()]);
-        console.log("options array" + options)
+        // console.log(options)
     };
     const delay = await resolveAfter1Second(10);
-    console.log("options array" + options)
+    console.log(options)
     // console.log('options: '+optionGen(matevalues.mateValues));
     return options;
 };
@@ -79,7 +79,7 @@ function resolveAfter1Second(x) {
 
 Blockly.Blocks['matevalues'] = {
     init: function() {
-    console.log('optarray ='+optArray);
+    console.log(optArray);
       this.appendValueInput("Position")
           .setCheck(null)
           .appendField("Select mate and set position (in radians)")
