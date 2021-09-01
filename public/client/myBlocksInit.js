@@ -57,8 +57,8 @@ var genOptionsArray = async function() {
     const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
     const matevalues = await response.json()
     for(let i = 0; i < matevalues.mateValues.length; i++) {
-        // console.log(JSON.stringify(matevalues.mateValues[i].mateName))
-        options.push([matevalues.mateValues[i].mateName,matevalues.mateValues[i].mateName.toUpperCase()]);
+        var name = matevalues.mateValues[i].mateName.replace(/\s/g, '');
+        options.push([name,name.toUpperCase()]);
         // console.log(options)
     };
     const delay = await resolveAfter1Second(10);
@@ -82,12 +82,12 @@ Blockly.Blocks['matevalues'] = {
     genOptionsArray().then(result =>
       {this.appendValueInput("Position")
           .setCheck(null)
-          .appendField("Select mate and set position (in radians)")
-          .appendField(new Blockly.FieldDropdown(result), "Mates");});
+          .appendField("Select mate")
+          .appendField(new Blockly.FieldDropdown(result), "Mates");
       this.setInputsInline(false);
       this.setColour(230);
    this.setTooltip("");
-   this.setHelpUrl("");
+   this.setHelpUrl("");});
    
 }
     // ,
