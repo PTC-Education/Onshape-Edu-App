@@ -52,7 +52,7 @@ Blockly.Blocks['dynamic_dropdown'] = {
 //     }
 // };
 
-const genOptionsArray = function() {
+var genOptionsArray = async function() {
     var options = [];
     const response = await fetch(`/api/getMateValues${window.location.search}`, { headers: { 'Accept': 'application/json' } })
     const matevalues = await response.json()
@@ -67,7 +67,7 @@ const genOptionsArray = function() {
     return options;
 };
 
-const optArray = genOptionsArray();
+var optArray = genOptionsArray();
 
 function resolveAfter1Second(x) {
     return new Promise(resolve => {
@@ -79,11 +79,11 @@ function resolveAfter1Second(x) {
 
 Blockly.Blocks['matevalues'] = {
     init: function() {
-    console.log(optArray);
+    console.log(genOptionsArray());
       this.appendValueInput("Position")
           .setCheck(null)
           .appendField("Select mate and set position (in radians)")
-          .appendField(new Blockly.FieldDropdown(optArray), "Mates");
+          .appendField(new Blockly.FieldDropdown(genOptionsArray()), "Mates");
       this.setInputsInline(false);
       this.setColour(230);
    this.setTooltip("");
