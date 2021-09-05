@@ -67,23 +67,13 @@ var genOptionsArray = async function() {
     return options;
 };
 
-// var optArray = genOptionsArray();
-
-function resolveAfter1Second(x) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve(x);
-      }, 1000);
-    });
-};
-
 Blockly.Blocks['matevalues'] = {
     init: function() {
-    console.log(localStorage.getItem('mateNames'));
+    console.log(JSON.parse(localStorage.getItem('mateNames')));
         this.appendValueInput("Position")
           .setCheck(null)
           .appendField("Select mate")
-          .appendField(new Blockly.FieldDropdown(localStorage.getItem('mateNames')), "Mates");
+          .appendField(new Blockly.FieldDropdown(JSON.parse(localStorage.getItem('mateNames'))), "Mates");
       this.setInputsInline(false);
       this.setColour(230);
    this.setTooltip("");

@@ -86,7 +86,7 @@ getMates()
         options.push([name,name.toUpperCase()]);
     };
     console.log(options);
-    localStorage.setItem('mateNames',options);
+    localStorage.setItem('mateNames',JSON.stringify(options));
   });
 
 async function runCode(highlighting) {
