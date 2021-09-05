@@ -85,6 +85,7 @@ getMates()
         var name = value.mateValues[i].mateName.replace(/\s/g, '');
         options.push([name,name.toUpperCase()]);
     };
+    console.log(options);
     localStorage.setItem('mateNames',options);
   });
 

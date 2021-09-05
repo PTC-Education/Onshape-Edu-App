@@ -79,7 +79,8 @@ function resolveAfter1Second(x) {
 
 Blockly.Blocks['matevalues'] = {
     init: function() {
-    this.appendValueInput("Position")
+    console.log(localStorage.getItem('mateNames'));
+        this.appendValueInput("Position")
           .setCheck(null)
           .appendField("Select mate")
           .appendField(new Blockly.FieldDropdown(localStorage.getItem('mateNames')), "Mates");
