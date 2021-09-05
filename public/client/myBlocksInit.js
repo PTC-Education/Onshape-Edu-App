@@ -61,7 +61,7 @@ var genOptionsArray = async function() {
         options.push([name,name.toUpperCase()]);
         // console.log(options)
     };
-    const delay = await resolveAfter1Second(10);
+    // const delay = await resolveAfter1Second(10);
     console.log(options)
     // console.log('options: '+optionGen(matevalues.mateValues));
     return options;
@@ -79,17 +79,16 @@ function resolveAfter1Second(x) {
 
 Blockly.Blocks['matevalues'] = {
     init: function() {
-    genOptionsArray().then(result =>
-      {this.appendValueInput("Position")
+    this.appendValueInput("Position")
           .setCheck(null)
           .appendField("Select mate")
-          .appendField(new Blockly.FieldDropdown(result), "Mates");
+          .appendField(new Blockly.FieldDropdown(localStorage.getItem('mateNames')), "Mates");
       this.setInputsInline(false);
       this.setColour(230);
    this.setTooltip("");
-   this.setHelpUrl("");});
+   this.setHelpUrl("");
    
-}
+    }
     // ,
 
     // generateOptions: async function() {

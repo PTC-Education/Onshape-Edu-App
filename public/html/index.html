@@ -78,12 +78,15 @@ getAppElementInfo()
   .then((value) => getChangeID(value.applicationID)
   .then((value) => Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(value.tree.blockly), Blockly.mainWorkspace)));
 
-// getMates()
-//   .then((value) => {
-//     for(var i = 0; i < value.mateValues.length; i++) {
-//                 console.log("mate name: "+JSON.stringify(value.mateValues[i].mateName));
-//               }
-//   });
+getMates()
+  .then((value) => {
+    var options = [];
+    for(var i = 0; i < value.mateValues.length; i++) {
+        var name = matevalues.mateValues[i].mateName.replace(/\s/g, '');
+        options.push([name,name.toUpperCase()]);
+    };
+    localStorage.setItem('mateNames',options);
+  });
 
 async function runCode(highlighting) {
   // Change the color of the button to indicate the process running
