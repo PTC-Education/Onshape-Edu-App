@@ -37,6 +37,7 @@ Blockly.JavaScript['matevalues'] = function(block) {
   var newPosition = Blockly.JavaScript.valueToCode(block, 'Position', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
   // await updateMatePosition(mateName,newPosition);
+  console.log(mateName);
   return mateName, newPosition;
 };
 

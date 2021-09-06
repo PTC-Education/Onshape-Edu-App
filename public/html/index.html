@@ -97,6 +97,7 @@ async function runCode(highlighting) {
   document.getElementById('runButton').style.color = "rgb(0, 0, 0)"
   
   var Name, Pos = Blockly.JavaScript.workspaceToCode(workspace);
+  console.log(Name, Pos)
   await updateMatePosition(Name, Pos);
 
   // TODO: The below modifies the opening lines of the code depending on the presence of precondition, this is a massive hack and should be fixed
