@@ -178,10 +178,10 @@ async function updateMatePosition(mateName,position) {
   for(var i = 0; i < mateJSON.mateValues.length; i++) {
         if (mateName == mateJSON.mateValues[i].mateName.replace(/\s/g, '').toUpperCase()) {
           if (mateJSON.mateValues[i].jsonType == "Revolute") {
-            newJSON.mateValues[i].rotationZ = Number(position);
+            newJSON.mateValues[i].rotationZ = parseFloat(position);
           }
           else if (mateJSON.mateValues[i].jsonType == "Slider") {
-            newJSON.mateValues[i].translationZ = Number(position);
+            newJSON.mateValues[i].translationZ = parseFloat(position);
           }
         }
         // else {
