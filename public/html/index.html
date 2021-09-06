@@ -178,10 +178,10 @@ async function updateMatePosition(mateName,position) {
   for(var i = 0; i < mateJSON.mateValues.length; i++) {
         if (mateName == mateJSON.mateValues[i].mateName.replace(/\s/g, '').toUpperCase()) {
           if (mateJSON.mateValues[i].jsonType == "Revolute") {
-            newJSON.mateValues[i].rotationZ = position;
+            newJSON.mateValues[i].rotationZ = Number(position);
           }
           else if (mateJSON.mateValues[i].jsonType == "Slider") {
-            newJSON.mateValues[i].translationZ = position;
+            newJSON.mateValues[i].translationZ = Number(position);
           }
         }
         // else {
@@ -191,6 +191,22 @@ async function updateMatePosition(mateName,position) {
   // Get the info of the export Feature Studio 
   console.log(newJSON)
   await setMates(JSON.stringify(newJSON));
+
+  // Get the info of the app element used for persistent storage
+  var appElementInfo = await getAppElementInfo();
+
+  // Get the xml and stringified xml representation of the current Blockly main workspace
+  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
+  var xml_text = Blockly.Xml.domToText(xml);
+  // console.log(xml_text)
+
+  // Update the JSON tree of the app element to persist storage of the last exported Blockly main workspace
+  await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)
+
+  // Change the color of the run button back to white after the tree is updated
+  document.getElementById('runButton').style.backgroundColor = "rgba(255, 255, 255, 0.5)"
+  document.getElementById('runButton').innerHTML = "Show me the CAD!"
+  document.getElementById('runButton').style.color = "rgb(153, 153, 153)"
 };
 
 
