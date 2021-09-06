@@ -33,12 +33,12 @@ Blockly.JavaScript['dynamic_dropdown'] = function(block) {
 };
 
 Blockly.JavaScript['matevalues'] = function(block) {
-  var mateName = block.getFieldValue('Mates');
-  var newPosition = Blockly.JavaScript.valueToCode(block, 'Position', Blockly.JavaScript.ORDER_ATOMIC);
+  var mateName = block.getFieldValue('mate');
+  var newPosition = Blockly.JavaScript.valueToCode(block, 'position', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
   // await updateMatePosition(mateName,newPosition);
   console.log(mateName);
-  return mateName, newPosition;
+  return [mateName, newPosition];
 };
 
 /*

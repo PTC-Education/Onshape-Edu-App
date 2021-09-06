@@ -8,11 +8,10 @@ get mate values from assembly
 
 Blockly.Blocks['matevalues'] = {
     init: function() {
-    console.log(JSON.parse(localStorage.getItem('mateNames')));
-        this.appendValueInput("Position")
+        this.appendValueInput("position")
           .setCheck(null)
           .appendField("Select mate")
-          .appendField(new Blockly.FieldDropdown(JSON.parse(localStorage.getItem('mateNames'))), "Mates");
+          .appendField(new Blockly.FieldDropdown(JSON.parse(localStorage.getItem('mateNames'))), "mate");
       this.setInputsInline(false);
       this.setColour(230);
    this.setTooltip("");

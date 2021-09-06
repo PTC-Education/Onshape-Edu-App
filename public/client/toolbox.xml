@@ -432,7 +432,6 @@
     </block>
     <block type='sweep'></block>
     <block type='loft'></block>
-    <block type='dynamic_dropdown'></block>
   </category>
 
   <category name="Assemblies" colour="#745CA6">
