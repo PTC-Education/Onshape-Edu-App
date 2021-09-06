@@ -15,7 +15,7 @@ async function getMates() {
 async function setMates(newJSON) {
     var header =  {'Accept': 'application/vnd.onshape.v2+json',
     'Content-Type': 'application/vnd.onshape.v2+json'};
-    var raw = JSON.stringify(newJSON);
+    var raw = newJSON;
     console.log(raw);
     try {
         const response = await fetch(`/api/setMateValues${window.location.search}`, {method: 'POST', body: raw, headers: header})
