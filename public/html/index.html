@@ -190,7 +190,7 @@ async function updateMatePosition(mateName,position) {
     };
   // Get the info of the export Feature Studio 
   console.log(newJSON)
-  await setMates(JSON.stringify(newJSON));
+  await setMates(newJSON);
 
   // Get the info of the app element used for persistent storage
   var appElementInfo = await getAppElementInfo();
