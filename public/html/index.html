@@ -96,13 +96,9 @@ async function runCode(highlighting) {
   document.getElementById('runButton').innerHTML = "Blocks running..."
   document.getElementById('runButton').style.color = "rgb(0, 0, 0)"
   
-  var code = Blockly.JavaScript.workspaceToCode(workspace);
+  var code = JSON.parse(Blockly.JavaScript.workspaceToCode(workspace));
   console.log(code)
-  try {
-    eval(code);
-    } catch (e) {
-      alert(e);
-    }
+  await updateMatePosition(code.mateName,code.newPosition)
 
   // TODO: The below modifies the opening lines of the code depending on the presence of precondition, this is a massive hack and should be fixed
     // break the textblock into an array of lines
@@ -174,7 +170,7 @@ function copyToClipboard(text) {
 
 */
 
-function updateMatePosition(mateName,position) {
+async function updateMatePosition(mateName,position) {
   var mateJSON = JSON.parse(localStorage.getItem('mateJSON'));
   var newJSON = mateJSON;
   console.log(mateName);
