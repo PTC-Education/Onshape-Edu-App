@@ -190,7 +190,7 @@ async function updateMatePosition(mateName,position) {
     };
   // Get the info of the export Feature Studio 
   console.log(newJSON)
-  await setMates(newJSON);
+  await setMates(JSON.stringify(newJSON));
 };
 
 
