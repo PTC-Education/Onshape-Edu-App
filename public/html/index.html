@@ -54,7 +54,7 @@
       |  <a href="https://www.youtube.com/watch?v=JqvT3McioFw" target="_blank" rel="noopener noreferrer" style="color: #656565">Getting Started</a>
 <br> FeatureBlocks Beta v0.01 | <a href="https://www.onshape.com/en/" target="_blank" style="text-decoration: none;color: #656565;">©2013 - Present, Onshape Inc.</a></div>
   <div id="blocklyDiv"></div>
-  <button id="runButton" onclick="runCode(true); return">Show me the CAD</button>
+  <button id="runButton" onclick="runCode(true); return">Run Blocks</button>
 </body>
 <!-- Define your custom blocks -->
 <script src="../client/myBlocksInit.js" charset="utf-8"></script>
@@ -82,47 +82,25 @@ getMates()
   .then((value) => {
     var options = [];
     for(var i = 0; i < value.mateValues.length; i++) {
-        var name = value.mateValues[i].mateName.replace(/\s/g, '');
-        options.push([name,name.toUpperCase()]);
+        var name = value.mateValues[i].mateName;
+        options.push([name,name]);
     };
     console.log(options);
+    localStorage.setItem('mateJSON',JSON.stringify(value))
     localStorage.setItem('mateNames',JSON.stringify(options));
   });
 
 async function runCode(highlighting) {
   // Change the color of the button to indicate the process running
   document.getElementById('runButton').style.backgroundColor = "rgba(192, 192, 192, 0.5)"
-  document.getElementById('runButton').innerHTML = "Creating CAD..."
+  document.getElementById('runButton').innerHTML = "Blocks running..."
   document.getElementById('runButton').style.color = "rgb(0, 0, 0)"
-  
-  var fsPrefix = `
-    FeatureScript 1389;
-    import(path : "onshape/std/geometry.fs", version : "1389.0");
-  `
-  
-  var fsCode = Blockly.JavaScript.workspaceToCode(workspace);
+  console.log(Blockly.JavaScript.mainWorkspace);
+  Blockly.JavaScript.mainWorkspace;
 
-
-  // TODO: The below modifies the opening lines of the code depending on the presence of precondition, this is a massive hack and should be fixed
-    // break the textblock into an array of lines
-  var lines = fsCode.split('\n');
-  var firstLine = lines[0];
-  //console.log("First line: " + firstLine)
-  if (firstLine.includes("var"))
-  {
-    // remove one line, starting at the first position
-    lines.splice(0,1);
-  }else if(!firstLine.includes("precondition")){
-    //console.log(lines);
-    //lines.splice(0, 0, "precondition{} \n { var i = 0;")
-  }
-  // join the array back into a single string
-  var fsCodeNoVar = lines.join('\n');
-  
-
-  fsCode =  fsPrefix + fsCodeNoVar;
-  // copyToClipboard(fsCode);
-  copyToFeatureStudio(fsCode);
+  document.getElementById('runButton').style.backgroundColor = "rgba(255, 255, 255, 0.5)"
+  document.getElementById('runButton').innerHTML = "Run Blocks"
+  document.getElementById('runButton').style.color = "rgb(153, 153, 153)"
   // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
   // if (highlighting)
   //   Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
@@ -164,6 +142,35 @@ function copyToClipboard(text) {
     document.body.removeChild(dummy);
 };
 
+/*
+   Copies all of the Blockly code to the Onshape workspace
+   
+   Input:
+ 
+   fsCode: FeatureScript code exported from Blockly
+
+*/
+
+async function updateMatePosition(mateName,position) {
+  var mateJSON = JSON.parse(localStorage.getItem('mateJSON'));
+  var newJSON = mateJSON;
+  for(var i = 0; i < mateJSON.mateValues.length; i++) {
+        if (mateName == mateJSON.mateValues[i].mateName) {
+          if (mateJSON.mateValues[i].jsonType == "Revolute") {
+            newJSON.mateValues[i].rotationZ = position;
+          }
+          else if (mateJSON.mateValues[i].jsonType == "Slider") {
+            newJSON.mateValues[i].translationZ = position;
+          }
+        }
+        else {
+          newJSON.mateValues.splice(i,1);
+        }
+    };
+  // Get the info of the export Feature Studio 
+  console.log(newJSON)
+  await setMates(newJSON);
+}
 
 
 /*

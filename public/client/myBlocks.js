@@ -33,9 +33,10 @@ Blockly.JavaScript['dynamic_dropdown'] = function(block) {
 };
 
 Blockly.JavaScript['matevalues'] = function(block) {
+  var mateName = block.getFieldValue('Mates');
+  var newPosition = Blockly.JavaScript.valueToCode(block, 'Position', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
-  return code;
+  await updateMatePosition(mateName,newPosition);
 };
 
 /*
