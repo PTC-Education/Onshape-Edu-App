@@ -18,7 +18,7 @@ async function setMates(newJSON) {
     var raw = JSON.stringify(newJSON);
     console.log(raw);
     try {
-        const response = await fetch(`/api/setMateValues${window.location.search}`, {method: 'POST', body: raw, headers: JSON.stringify(header)})
+        const response = await fetch(`/api/setMateValues${window.location.search}`, {method: 'POST', body: raw, headers: header})
         const matevalues = await response.json();
         return matevalues;
     } catch (error) {
