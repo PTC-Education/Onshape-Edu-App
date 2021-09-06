@@ -172,13 +172,14 @@ function copyToClipboard(text) {
 
 async function updateMatePosition(mateName,position) {
   var mateJSON = JSON.parse(localStorage.getItem('mateJSON'));
-  var newJSON = mateJSON;
-  console.log(mateName);
-  console.log(mateJSON.mateValues[0].mateName.replace(/\s/g, '').toUpperCase())
+  var newMate;
+  // console.log(mateName);
+  // console.log(mateJSON.mateValues[0].mateName.replace(/\s/g, '').toUpperCase())
   for(var i = 0; i < mateJSON.mateValues.length; i++) {
         if (mateName == mateJSON.mateValues[i].mateName.replace(/\s/g, '').toUpperCase()) {
           if (mateJSON.mateValues[i].jsonType == "Revolute") {
-            newJSON.mateValues[i].rotationZ = parseFloat(position);
+            newMate = newJSON.mateValues[i];
+            newMate.rotationZ = parseFloat(position);
           }
           else if (mateJSON.mateValues[i].jsonType == "Slider") {
             newJSON.mateValues[i].translationZ = parseFloat(position);
@@ -189,8 +190,8 @@ async function updateMatePosition(mateName,position) {
         // }
     };
   // Get the info of the export Feature Studio 
-  console.log(newJSON)
-  await setMates(newJSON);
+  console.log(newMate)
+  await setMates({"mateValues":[newMate]});
 
   // Get the info of the app element used for persistent storage
   var appElementInfo = await getAppElementInfo();
@@ -205,7 +206,7 @@ async function updateMatePosition(mateName,position) {
 
   // Change the color of the run button back to white after the tree is updated
   document.getElementById('runButton').style.backgroundColor = "rgba(255, 255, 255, 0.5)"
-  document.getElementById('runButton').innerHTML = "Show me the CAD!"
+  document.getElementById('runButton').innerHTML = "Run Blocks"
   document.getElementById('runButton').style.color = "rgb(153, 153, 153)"
 };
 
