@@ -172,6 +172,8 @@ function copyToClipboard(text) {
 async function updateMatePosition(mateName,position) {
   var mateJSON = JSON.parse(localStorage.getItem('mateJSON'));
   var newJSON = mateJSON;
+  console.log(mateName);
+  console.log(mateJSON.mateValues[0].mateName.replace(/\s/g, '').toUpperCase())
   for(var i = 0; i < mateJSON.mateValues.length; i++) {
         if (mateName == mateJSON.mateValues[i].mateName.replace(/\s/g, '').toUpperCase()) {
           if (mateJSON.mateValues[i].jsonType == "Revolute") {
@@ -181,9 +183,9 @@ async function updateMatePosition(mateName,position) {
             newJSON.mateValues[i].translationZ = position;
           }
         }
-        else {
-          newJSON.mateValues.splice(i,1);
-        }
+        // else {
+        //   newJSON.mateValues.splice(i,1);
+        // }
     };
   // Get the info of the export Feature Studio 
   console.log(newJSON)
