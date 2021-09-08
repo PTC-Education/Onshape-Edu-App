@@ -28,7 +28,7 @@ apiRouter.get('/getMateValues', (req, res) => {
 /**
  * Set MateValues in Assembly 
  */
- apiRouter.post('/setMateValues', (req, res) => {
+apiRouter.post('/setMateValues', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/assemblies/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.elementId}/matevalues`, req, res);
 }); 
 
