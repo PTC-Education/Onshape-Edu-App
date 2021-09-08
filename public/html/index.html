@@ -183,7 +183,7 @@ async function updateMatePosition(mateName,position) {
           }
           else if (mateJSON.mateValues[i].jsonType == "Slider") {
             newMate = mateJSON.mateValues[i];
-            newMate.rotationZ = parseFloat(position);
+            newMate.translationZ = parseFloat(position);
           }
         }
         // else {
