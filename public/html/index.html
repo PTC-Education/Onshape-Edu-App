@@ -85,7 +85,7 @@ getMates()
         var name = value.mateValues[i].mateName.replace(/\s/g, '');
         options.push([name,name.toUpperCase()]);
     };
-    console.log(options);
+    // console.log(options);
     localStorage.setItem('mateJSON',JSON.stringify(value))
     localStorage.setItem('mateNames',JSON.stringify(options));
   });
@@ -98,7 +98,8 @@ async function runCode(highlighting) {
   
   var code = JSON.parse(Blockly.JavaScript.workspaceToCode(workspace));
   console.log(code)
-  await updateMatePosition(code.mateName,code.newPosition)
+  eval(code)
+  // await updateMatePosition(code.mateName,code.newPosition)
 
   // TODO: The below modifies the opening lines of the code depending on the presence of precondition, this is a massive hack and should be fixed
     // break the textblock into an array of lines
