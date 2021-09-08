@@ -192,11 +192,11 @@ async function updateMatePosition(mateName,position) {
     };
 
   console.log(newMate)
-  // await setMates({'mateValues':[newMate]});
-  await setMates({'mateValues':[{'featureId': "MTL9NFGQ/BOFQxUff",
-    'jsonType': "Revolute",
-    'mateName': "Revolute 1",
-    'rotationZ': 1}]})
+  await setMates({'mateValues':[newMate]});
+  // await setMates({'mateValues':[{'featureId': "MTL9NFGQ/BOFQxUff",
+  //   'jsonType': "Revolute",
+  //   'mateName': "Revolute 1",
+  //   'rotationZ': 1}]})
 
   // Get the info of the app element used for persistent storage
   var appElementInfo = await getAppElementInfo();

@@ -15,7 +15,10 @@ async function getMates() {
 async function setMates(newJSON) {
     var header =  {'Accept': 'application/json',
     'Content-Type': 'application/json'};
-    var raw = newJSON;
+    var raw = {'mateValues':[{'featureId': "MTL9NFGQ/BOFQxUff",
+      'jsonType': "Revolute",
+      'mateName': "Revolute 1",
+      'rotationZ': 1}]};
     console.log(raw);
     try {
         const response = await fetch(`/api/setMateValues${window.location.search}`, { method: 'POST', body: raw, headers: header})
