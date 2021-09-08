@@ -190,9 +190,13 @@ async function updateMatePosition(mateName,position) {
         //   newJSON.mateValues.splice(i,1);
         // }
     };
-  // Get the info of the export Feature Studio 
+
   console.log(newMate)
-  await setMates({'mateValues':[newMate]});
+  // await setMates({'mateValues':[newMate]});
+  await setMates({'mateValues':[{'featureId': "MTL9NFGQ/BOFQxUff",
+    'jsonType': "Revolute",
+    'mateName': "Revolute 1",
+    'rotationZ': 1}]})
 
   // Get the info of the app element used for persistent storage
   var appElementInfo = await getAppElementInfo();
