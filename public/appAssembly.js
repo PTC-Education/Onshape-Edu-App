@@ -49,13 +49,10 @@ async function transformOccurrence(newJSON) {
 /*
  Get Assembly Definition
 */
-async function getAssemblyDefinition(newJSON) {
-    var header =  {'Accept': 'application/json',
-    'Content-Type': 'application/json'};
-    var raw = JSON.stringify(newJSON);
-    console.log(raw);
+async function getAssemblyDef() {
+    var header =  {'Accept': 'application/json'};
     try {
-        const response = await fetch(`/api/getAssemblyDefinition${window.location.search}`, { method: 'POST', body: raw, headers: header})
+        const response = await fetch(`/api/getAssemblyDefinition${window.location.search}`, { method: 'GET', headers: header})
         const assemblyDef = await response.json();
         return assemblyDef;
     } catch (error) {
