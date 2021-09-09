@@ -12,7 +12,9 @@ Blockly.Blocks['matevalues'] = {
           .setCheck(null)
           .appendField("Select mate")
           .appendField(new Blockly.FieldDropdown(JSON.parse(localStorage.getItem('mateNames'))), "mate");
-      this.setInputsInline(false);
+          this.setPreviousStatement(true, null);
+          this.setNextStatement(true, null);
+          this.setInputsInline(false);
       this.setColour(230);
    this.setTooltip("");
    this.setHelpUrl("");
