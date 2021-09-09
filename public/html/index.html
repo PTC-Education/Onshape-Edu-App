@@ -108,7 +108,7 @@ async function runCode(highlighting) {
   document.getElementById('runButton').style.color = "rgb(0, 0, 0)"
   
   var code = Blockly.JavaScript.workspaceToCode(workspace);
-  // console.log(code)
+  console.log(code)
   var posArray = code.split(';');
   var mateNames = [];
   var mateVals = [];
@@ -121,11 +121,11 @@ async function runCode(highlighting) {
       mateVals.push(pos.newPosition);
     }
     else if ('partName' in pos) {
-      mateNames.push(pos.partName);
-      mateVals.push(pos.newPosition);
+      partNames.push(pos.partName);
+      partVals.push(pos.newPosition);
     }
   }
-
+  
   await updateMatePositions(mateNames,mateVals);
   
 
@@ -250,10 +250,32 @@ async function updateMatePositions(mateNames,positions) {
           }
       };
   }
-
-  console.log(newJSON);
   await setMates(newJSON);
 
+  await updateAppStorage();
+};
+
+async function translateParts(partNames,positions) {
+  var assemblyDef = JSON.parse(localStorage.getItem('assemblyDef'));
+  var occurrences = assemblyDef.rootAssembly.occurrences;
+  var instances = assemblyDef.rootAssembly.instances[i].name.replace(/\s/g, '');
+  // var newJSON = mateJSON;
+  for (var j = 0; j < partNames.length; j++) {
+    for(var i = 0; i < instances.length; i++) {
+          if (partNames[j] == instances[i].name.replace(/\s/g, '').toUpperCase()) {
+            
+          }
+      };
+  }
+  await setMates(newJSON);
+
+  await updateAppStorage();
+};
+
+/*
+   Function for storing workspace to appElement
+*/
+async function updateAppStorage(){
   // Get the info of the app element used for persistent storage
   var appElementInfo = await getAppElementInfo();
 
@@ -269,8 +291,7 @@ async function updateMatePositions(mateNames,positions) {
   document.getElementById('runButton').style.backgroundColor = "rgba(255, 255, 255, 0.5)"
   document.getElementById('runButton').innerHTML = "Run Blocks"
   document.getElementById('runButton').style.color = "rgb(153, 153, 153)"
-};
-
+}
 
 </script>
 </html>
