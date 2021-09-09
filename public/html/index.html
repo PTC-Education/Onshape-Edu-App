@@ -219,7 +219,7 @@ async function updateOneMatePosition(mateName,position) {
 async function updateMatePositions(mateNames,positions) {
   var mateJSON = JSON.parse(localStorage.getItem('mateJSON'));
   var newJSON = mateJSON;
-  for (var j = 0; i < mateNames.length; i++) {
+  for (var j = 0; j < mateNames.length; j++) {
     for(var i = 0; i < mateJSON.mateValues.length; i++) {
           if (mateNames[j] == mateJSON.mateValues[i].mateName.replace(/\s/g, '').toUpperCase()) {
             if (mateJSON.mateValues[i].jsonType == "Revolute") {
