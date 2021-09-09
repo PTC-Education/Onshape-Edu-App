@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Onshape FeatureBlocks</title>
+  <title>Onshape MotionBlocks</title>
   <script src="../client/blockly_compressed.js" charset="utf-8"></script>
   <script src="../client/blocks_compressed.js" charset="utf-8"></script>
   <script src="../client/javascript_compressed.js" charset="utf-8"></script>
@@ -108,17 +108,25 @@ async function runCode(highlighting) {
   document.getElementById('runButton').style.color = "rgb(0, 0, 0)"
   
   var code = Blockly.JavaScript.workspaceToCode(workspace);
-  console.log(code)
+  // console.log(code)
   var posArray = code.split(';');
   var mateNames = [];
-  var posVals = []
+  var mateVals = [];
+  var partNames = [];
+  var partVals = [];
   for (var i=0; i<posArray.length-1; i++) {
     var pos = JSON.parse(posArray[i]);
-    mateNames.push(pos.mateName);
-    posVals.push(pos.newPosition);
+    if ('mateName' in pos) {
+      mateNames.push(pos.mateName);
+      mateVals.push(pos.newPosition);
+    }
+    else if ('partName' in pos) {
+      mateNames.push(pos.partName);
+      mateVals.push(pos.newPosition);
+    }
   }
 
-  await updateMatePositions(mateNames,posVals);
+  await updateMatePositions(mateNames,mateVals);
   
 
   // TODO: The below modifies the opening lines of the code depending on the presence of precondition, this is a massive hack and should be fixed
