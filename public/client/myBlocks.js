@@ -26,20 +26,32 @@ Adds a timed wait function.
 --------------------------------------------------------------------------------------
 */
 
-Blockly.JavaScript['dynamic_dropdown'] = function(block) {
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
-  return code;
-};
+/*
+Testing direct code execution
+*/
 
 Blockly.JavaScript['matevalues'] = function(block) {
   var mateName = block.getFieldValue('mate');
   var newPosition = Blockly.JavaScript.valueToCode(block, 'position', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
   // await updateMatePosition(mateName,newPosition);
-  var code = '(async () => {await updateMatePosition('+mateName+','+newPosition+')})();'
+  var code = 'await updateMatePosition('+mateName+','+newPosition+');'
   return code;
 };
+
+/*
+Passing JSON 
+*/
+
+// Blockly.JavaScript['matevalues'] = function(block) {
+//   var mateName = block.getFieldValue('mate');
+//   var newPosition = Blockly.JavaScript.valueToCode(block, 'position', Blockly.JavaScript.ORDER_ATOMIC);
+//   // TODO: Assemble JavaScript into code variable.
+//   // await updateMatePosition(mateName,newPosition);
+//   var code = '(async () => {await updateMatePosition('+mateName+','+newPosition+')})();'
+//   return code;
+// };
+
 
 /*
 --------------------------------------------------------------------------------------
