@@ -125,10 +125,12 @@ async function runCode(highlighting) {
       partVals.push(pos.newPosition);
     }
   }
+
+  console.log(partVals);
   
   await updateMatePositions(mateNames,mateVals);
-  
 
+  await updateAppStorage();
   // TODO: The below modifies the opening lines of the code depending on the presence of precondition, this is a massive hack and should be fixed
     // break the textblock into an array of lines
   // var lines = fsCode.split('\n');
@@ -218,21 +220,7 @@ async function updateOneMatePosition(mateName,position) {
   console.log(newMate)
   await setMates({'mateValues':[newMate]});
 
-  // Get the info of the app element used for persistent storage
-  var appElementInfo = await getAppElementInfo();
-
-  // Get the xml and stringified xml representation of the current Blockly main workspace
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
-  var xml_text = Blockly.Xml.domToText(xml);
-  // console.log(xml_text)
-
-  // Update the JSON tree of the app element to persist storage of the last exported Blockly main workspace
-  await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)
-
-  // Change the color of the run button back to white after the tree is updated
-  document.getElementById('runButton').style.backgroundColor = "rgba(255, 255, 255, 0.5)"
-  document.getElementById('runButton').innerHTML = "Run Blocks"
-  document.getElementById('runButton').style.color = "rgb(153, 153, 153)"
+  // await updateAppStorage();
 };
 
 async function updateMatePositions(mateNames,positions) {
@@ -252,24 +240,36 @@ async function updateMatePositions(mateNames,positions) {
   }
   await setMates(newJSON);
 
-  await updateAppStorage();
+  // await updateAppStorage();
 };
 
 async function translateParts(partNames,positions) {
   var assemblyDef = JSON.parse(localStorage.getItem('assemblyDef'));
   var occurrences = assemblyDef.rootAssembly.occurrences;
   var instances = assemblyDef.rootAssembly.instances[i].name.replace(/\s/g, '');
+  var partIDs = [];
+  var newOccurrences = [];
+  var newTransforms = [];
   // var newJSON = mateJSON;
   for (var j = 0; j < partNames.length; j++) {
     for(var i = 0; i < instances.length; i++) {
           if (partNames[j] == instances[i].name.replace(/\s/g, '').toUpperCase()) {
-            
+            partIDs.push(instances[i].id)
           }
       };
   }
+
+  for (var j = 0; j < partIDs.length; j++) {
+    for(var i = 0; i < occurrences.length; i++) {
+          if (partIDs[j] == occurrences[i].path[0]) {
+            newOccurrences.push(instances[i].id)
+          }
+      };
+  }
+
   await setMates(newJSON);
 
-  await updateAppStorage();
+  // await updateAppStorage();
 };
 
 /*
