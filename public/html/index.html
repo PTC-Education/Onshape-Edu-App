@@ -99,7 +99,7 @@ async function runCode(highlighting) {
   var code = Blockly.JavaScript.workspaceToCode(workspace);
   console.log(code)
   var posArray = code.split(';')
-  for (var i=0; i<posArray.length()-1; i++) {
+  for (var i=0; i<posArray.length-1; i++) {
     var pos = JSON.parse(posArray[i]);
     console.log(pos)
 
