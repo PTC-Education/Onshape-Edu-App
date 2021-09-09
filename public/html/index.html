@@ -96,7 +96,7 @@ async function runCode(highlighting) {
   document.getElementById('runButton').innerHTML = "Blocks running..."
   document.getElementById('runButton').style.color = "rgb(0, 0, 0)"
   
-  var code = JSON.parse(Blockly.JavaScript.workspaceToCode(workspace));
+  var code = Blockly.JavaScript.workspaceToCode(workspace);
   console.log(code)
   eval(code)
   // await updateMatePosition(code.mateName,code.newPosition)
