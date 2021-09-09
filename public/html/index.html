@@ -98,8 +98,8 @@ async function runCode(highlighting) {
   
   var code = Blockly.JavaScript.workspaceToCode(workspace);
   console.log(code)
-  var F = new Function(code);
-  console.log(F);
+  eval(code);
+  // console.log(F);
   // await updateMatePosition(code.mateName,code.newPosition)
 
   // TODO: The below modifies the opening lines of the code depending on the presence of precondition, this is a massive hack and should be fixed
