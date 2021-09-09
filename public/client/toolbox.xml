@@ -436,6 +436,15 @@
 
   <category name="Assemblies" colour="#745CA6">
     <block type='matevalues'></block>
+    <block type='parttransform'>
+      <value name="new_xyz">
+        <shadow type="vector3Field">
+          <field name="x">0</field>
+          <field name="y">0</field>
+          <field name="z">0</field>
+        </shadow>
+      </value>
+    </block>
   </category>
 
   <sep></sep>

@@ -23,6 +23,29 @@ Blockly.Blocks['matevalues'] = {
 };
 
 /*
+Part Transform:
+----------------------------------------
+get mate values from assembly
+*/
+
+Blockly.Blocks['parttransform'] = {
+    init: function() {
+        this.appendValueInput("new_xyz")
+          .setCheck(null)
+          .appendField("Select part")
+          .appendField(new Blockly.FieldDropdown(JSON.parse(localStorage.getItem('assemblyParts'))), "part")
+          .appendField("Move to [X,Y,Z]:");
+          this.setPreviousStatement(true, null);
+          this.setNextStatement(true, null);
+          this.setInputsInline(false);
+      this.setColour(230);
+   this.setTooltip("");
+   this.setHelpUrl("");
+   
+    }
+};
+
+/*
 WAIT:
 ----------------------------------------
 Input desired amount of seconds to wait 

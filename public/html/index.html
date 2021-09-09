@@ -86,9 +86,20 @@ getMates()
         options.push([name,name.toUpperCase()]);
     };
     // console.log(options);
-    localStorage.setItem('mateJSON',JSON.stringify(value))
+    localStorage.setItem('mateJSON',JSON.stringify(value));
     localStorage.setItem('mateNames',JSON.stringify(options));
   });
+
+getAssemblyDef()
+  .then((value) => {
+    var instances = [];
+    for(var i = 0; i < value.rootAssembly.instances.length; i++) {
+      var part = value.rootAssembly.instances[i].name.replace(/\s/g, '');
+      instances.push([part,part.toUpperCase()]);
+    }
+    localStorage.setItem('assemblyDef',JSON.stringify(value));
+    localStorage.setItem('assemblyParts',JSON.stringify(instances));
+  })
 
 async function runCode(highlighting) {
   // Change the color of the button to indicate the process running

@@ -22,7 +22,7 @@ use in filling out fields
 /*
 MateValues:
 --------------------------------------------------------------------------------------
-Adds a timed wait function. 
+Select mate and move to new position
 --------------------------------------------------------------------------------------
 */
 
@@ -49,6 +49,22 @@ Blockly.JavaScript['matevalues'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
   // await updateMatePosition(mateName,newPosition);
   var code = JSON.stringify({'mateName':mateName,'newPosition':newPosition})+';';
+  return code;
+};
+
+/*
+Part Transform:
+--------------------------------------------------------------------------------------
+Adds a timed wait function. 
+--------------------------------------------------------------------------------------
+*/
+
+Blockly.JavaScript['parttransform'] = function(block) {
+  var mateName = block.getFieldValue('part');
+  var newPosition = Blockly.JavaScript.valueToCode(block, 'new_xyz', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  // await updateMatePosition(mateName,newPosition);
+  var code = JSON.stringify({'partName':mateName,'newPosition':newPosition})+';';
   return code;
 };
 

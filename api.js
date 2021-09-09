@@ -33,6 +33,20 @@ apiRouter.post('/setMateValues', (req, res) => {
 }); 
 
 /**
+ * Get Assembly Definition
+ */
+ apiRouter.get('/getAssemblyDefinition', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/assemblies/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.elementId}`, req, res);
+}); 
+
+/**
+ * Transform Assembly Occurrences
+ */
+ apiRouter.post('/transformOccurrences', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/assemblies/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.elementId}`, req, res);
+}); 
+
+/**
  * Get the Elements of the current document/workspace.
  * 
  * GET /api/elements
