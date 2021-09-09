@@ -96,10 +96,16 @@ async function runCode(highlighting) {
   document.getElementById('runButton').innerHTML = "Blocks running..."
   document.getElementById('runButton').style.color = "rgb(0, 0, 0)"
   
-  var code = JSON.parse(Blockly.JavaScript.workspaceToCode(workspace));
+  var code = Blockly.JavaScript.workspaceToCode(workspace);
   console.log(code)
+  var posArray = code.split(';')
+  for (var i=0; i<posArray.length()-1; i++) {
+    var pos = JSON.parse(posArray[i]);
+    console.log(pos)
 
-  await updateMatePosition(code.mateName,code.newPosition)
+    await updateMatePosition(pos.mateName,pos.newPosition)
+  }
+  
 
   // TODO: The below modifies the opening lines of the code depending on the presence of precondition, this is a massive hack and should be fixed
     // break the textblock into an array of lines
