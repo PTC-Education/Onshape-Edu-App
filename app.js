@@ -74,12 +74,12 @@ app.use('/oauthSignin', (req, res) => {
 }, (req, res) => { /* redirected to Onshape for authentication */ });
 
 app.use('/oauthRedirect', passport.authenticate('onshape', { failureRedirect: '/grantDenied' }), (req, res) => {
-    res.redirect(`/?documentId=${req.session.state.docId}&workspaceId=${req.session.state.workId}&elementId=${req.session.state.elId}`);
-});
-
-app.use('/oauthRedirectDashboard', passport.authenticate('onshape', { failureRedirect: '/grantDenied' }), (req, res) => {
     res.redirect(`/dashboard?documentId=${req.session.state.docId}&workspaceId=${req.session.state.workId}&elementId=${req.session.state.elId}`);
 });
+
+// app.use('/oauthRedirectDashboard', passport.authenticate('onshape', { failureRedirect: '/grantDenied' }), (req, res) => {
+//     res.redirect(`/dashboard?documentId=${req.session.state.docId}&workspaceId=${req.session.state.workId}&elementId=${req.session.state.elId}`);
+// });
 
 app.get('/grantDenied', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'html', 'grantDenied.html'));
