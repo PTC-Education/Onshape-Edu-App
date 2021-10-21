@@ -8,7 +8,7 @@ async function getJSONTree(applicationID) {
     header =  {'Content-Type':'application/json'}
     
     try {
-          const response = await fetch(`/api/getJsonTree${window.location.search}&storageId=${applicationID}`, {method: 'GET', body: "", headers: header});
+          const response = await fetch(`/api/getJsonTree${window.location.search}&storageId=${applicationID}`, {method: 'GET', headers: header});
           const testFour = await response.json();
           console.log(testFour)
           return testFour;
