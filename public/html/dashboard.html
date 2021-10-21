@@ -47,26 +47,5 @@ getDashboardAppElementInfo()
   .then((value) => getJSONTree(value.applicationID)
   .then((value) => consol.log(value)));
 
-/*
-   Function for storing workspace to appElement
-*/
-async function updateAppStorage(){
-  // Get the info of the app element used for persistent storage
-  var appElementInfo = await getAppElementInfo();
-
-  // Get the xml and stringified xml representation of the current Blockly main workspace
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
-  var xml_text = Blockly.Xml.domToText(xml);
-  // console.log(xml_text)
-
-  // Update the JSON tree of the app element to persist storage of the last exported Blockly main workspace
-  await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)
-
-  // Change the color of the run button back to white after the tree is updated
-  document.getElementById('runButton').style.backgroundColor = "rgba(255, 255, 255, 0.5)"
-  document.getElementById('runButton').innerHTML = "Run Blocks"
-  document.getElementById('runButton').style.color = "rgb(153, 153, 153)"
-}
-
 </script>
 </html>
