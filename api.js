@@ -66,8 +66,15 @@ apiRouter.get('/elements', (req, res) => {
  *      -or-
  *      -> 500, { error: '...' }
  */
- apiRouter.get('/getElementChangeId', (req, res) => {
+apiRouter.get('/getElementChangeId', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/appelements/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.storageId}/content/json?transactionId=&changeId=`, req, res);
+});
+
+/**
+ * Get JSON Tree from AppElement
+ */
+apiRouter.get('/getJsonTree', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/appelements/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.storageId}/content/json`, req, res);
 });
 
 

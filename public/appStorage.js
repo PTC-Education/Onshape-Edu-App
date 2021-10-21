@@ -50,6 +50,32 @@ async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
       }
     };
 
+/*
+   Boolean function that indicates if there is a Blockly app element for 
+   persistent storage of the current blockly workspace.
+*/
+
+async function hasDashboardStorage(featureStudios){
+  for (var i = 0; i < featureStudios.length; i++) {
+    if (featureStudios[i].name == "Dashboard Storage") {
+      var hasStudio = true
+      var index = i
+      return {
+        hasStudio,
+        index
+      }
+    }
+  }
+  console.log(index)
+  console.log(index)
+  var hasStudio = false
+  var index = null
+  return {
+        hasStudio,
+        index
+      }
+};
+
 
 /*
    Boolean function that indicates if there is a Blockly app element for 
@@ -107,6 +133,41 @@ async function getChangeID(elementId) {
   }
 };
 
+/*
+ Combines all utility functions into one function that deals with creation and upkeep of the
+ app element 
+*/
+
+async function getDashboardAppElementInfo() {
+  var applications = await getApplicationID();
+
+  // Check if there are none and if so, create the export a new application storage
+  if (applications.length == 0) {
+    var application = await createNewAppElement()
+    var applicationID = application.elementId
+    var changeID = application.changeId
+  } else {
+
+    // If there are FeatureStudios is there already an export FeatureStudio
+    results = await hasDashboardStorage(applications)
+
+    // If there is no export Feature Studio then create one
+    if (!(results.hasStudio)) { 
+      var application = await createNewAppElement()
+      var applicationID = application.elementId
+      var changeID = application.changeId
+    } else {
+      var application = applications[results.index]
+      var applicationID = applications[results.index].id
+      var changeID = (await getChangeID(applicationID)).changeId
+    }
+  }
+  return {
+    "application" : application,
+    "applicationID" : applicationID,
+    "changeID" : changeID
+  }
+}
 
 /*
  Combines all utility functions into one function that deals with creation and upkeep of the
@@ -144,6 +205,24 @@ async function getAppElementInfo() {
   }
 }
 
+/*
+  Updates the JSON tree element of the application storage element 
+*/
+
+async function getJSONTree(applicationID) {
+
+  // console.log(`${blocklyXML}`)
+  // Define Content-Type for correct body parsing
+  header =  {'Content-Type':'application/json'}
+  
+  try {
+        const response = await fetch(`/api/getJsonTree${window.location.search}&storageId=${applicationID}`, {method: 'POST', body: "", headers: header});
+        const testFour = await response.json();
+        return testFour;
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 /*
   Updates the JSON tree element of the application storage element 
