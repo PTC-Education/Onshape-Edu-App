@@ -211,12 +211,11 @@ async function getAppElementInfo() {
 
 async function getJSONTree(applicationID) {
 
-  // console.log(`${blocklyXML}`)
   // Define Content-Type for correct body parsing
   header =  {'Content-Type':'application/json'}
   
   try {
-        const response = await fetch(`/api/getJsonTree${window.location.search}&storageId=${applicationID}`, {method: 'POST', body: "", headers: header});
+        const response = await fetch(`/api/getJsonTree${window.location.search}&storageId=${applicationID}`, {method: 'GET', body: "", headers: header});
         const testFour = await response.json();
         return testFour;
     } catch (error) {

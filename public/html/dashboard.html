@@ -25,6 +25,15 @@
     text-align: center;
     font-family: "Flama", "Open Sans","Helvetica Neue","Helvetica","Arial","sans-serif";
   }
+  #updateButton {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 50%);
+    color: #999;
+    border-radius: 5px;
+  }
   </style>
 
 </head>
@@ -32,12 +41,14 @@
 <body>
 <h2>hello world</h2>
 Dashboard for visualizing 3D printer info
+<button id="updateButton" onclick="runCode(true); return">Update Info</button>
 </body>
 
-<script src="../appStorage.js" charset="utf-8"></script>
+<!-- <script src="../appStorage.js" charset="utf-8"></script>
 <script src="../appFeatureList.js" charset="utf-8"></script>
 <script src="../appExportStudio.js" charset="utf-8"></script>
-<script src="../appAssembly.js" charset="utf-8"></script>
+<script src="../appAssembly.js" charset="utf-8"></script> -->
+<script src="../appDashboard.js" charset="utf-8"></script>
 
 <script>
 
