@@ -76,9 +76,9 @@ getDashboardAppElementInfo()
 
 function showImage() {
     var jsonTree = JSON.parse(localStorage.getItem('jsonTree'));
-    console.log(jsonTree['tree']['image']);
+    // console.log(jsonTree['tree']['image']);
     // console.log("<img src='"+localStorage.getItem('jsonTree')['tree']['image']+"'>")
-    document.getElementById("printerImage").innerHTML = "<img src='"+localStorage.getItem('jsonTree')['tree']['image']+"'>"
+    document.getElementById("printerImage").innerHTML = "<img src='"+jsonTree['tree']['image']+"' width=400>"
 }
 
 function runCode() {
