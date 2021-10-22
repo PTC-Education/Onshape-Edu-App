@@ -51,8 +51,6 @@ formElem.onsubmit = async (e) => {
 
     var inputData = new FormData(formElem);
 
-    let result = await response.json();
-
     alert(inputData.get('name'));
 };
 </script>
@@ -69,7 +67,7 @@ getDashboardAppElementInfo()
                     localStorage.setItem('applicationId',value.applicationId);
                     return tree})
   .then((value) => {localStorage.setItem('jsonTree',value);
-      consol.log(value['tree']['image'])});
+      console.log(value['tree']['image'])});
 
 function jsonTreeUpdate(form) {
     form.
