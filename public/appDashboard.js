@@ -9,9 +9,8 @@ async function getJSONTree(applicationID) {
     
     try {
           const response = await fetch(`/api/getJsonTree${window.location.search}&storageId=${applicationID}`, {method: 'GET', headers: header});
-          const testFour = await response.json();
-          console.log(testFour)
-          return testFour;
+          const responseJson = await response.json();
+          return responseJson;
       } catch (error) {
           console.error(error);
       }
@@ -31,8 +30,6 @@ async function hasDashboardStorage(elementList){
         }
       }
     }
-    console.log(index)
-    console.log(index)
     var hasStudio = false
     var index = null
     return {
@@ -76,16 +73,69 @@ async function getDashboardAppElementInfo() {
         console.log("no app element")
       } else {
         var application = appElementList[results.index]
-        var applicationID = appElementList[results.index].id
-        var jsonTree = await getJSONTree(applicationID)
-        console.log(jsonTree)
-        var changeID = jsonTree.changeId
+        var applicationId = appElementList[results.index].id
+        var jsonTree = await getJSONTree(applicationId)
+        var changeId = jsonTree.changeId
       }
     }
     return {
         "jsonTree" : jsonTree,
       "application" : application,
-      "applicationID" : applicationID,
-      "changeID" : changeID
+      "applicationId" : applicationId,
+      "changeId" : changeId
     }
 }
+
+/*
+  Updates the JSON tree element of the application storage element 
+*/
+
+async function updateJSONTreeKey(applicationID, changeID, key, value) {
+
+    // Format the body of the POST request
+    raw = JSON.stringify({
+      "parentChangeId": `${changeID}`,
+      "jsonTreeEdit":{"btType": "BTJEditChange-2636",
+        "path": {"btType": "BTJPath-3073", "startNode": "", "path": [{"btType": "BTJPathKey-3221", "key": `${key}`}]},
+        "value": `${value}`}
+      }
+    )
+    // console.log(`${blocklyXML}`)
+    // Define Content-Type for correct body parsing
+    header =  {'Content-Type':'application/json'}
+    
+    try {
+          const response = await fetch(`/api/updateAppElement${window.location.search}&storageId=${applicationID}`, {method: 'POST', body: raw, headers: header});
+          const testFour = await response.json();
+          return testFour;
+      } catch (error) {
+          console.error(error);
+      }
+  };
+
+  /*
+  Updates the JSON tree element of the application storage element 
+*/
+
+async function addJSONTreeKey(applicationID, changeID, key, value) {
+
+    // Format the body of the POST request
+    raw = JSON.stringify({
+      "parentChangeId": `${changeID}`,
+      "jsonTreeEdit":{"btType": "BTJEditInsert-2523",
+        "path": {"btType": "BTJPath-3073", "startNode": "", "path": [{"btType": "BTJPathKey-3221", "key": `${key}`}]},
+        "value": `${value}`}
+      }
+    )
+    // console.log(`${blocklyXML}`)
+    // Define Content-Type for correct body parsing
+    header =  {'Content-Type':'application/json'}
+    
+    try {
+          const response = await fetch(`/api/updateAppElement${window.location.search}&storageId=${applicationID}`, {method: 'POST', body: raw, headers: header});
+          const testFour = await response.json();
+          return testFour;
+      } catch (error) {
+          console.error(error);
+      }
+  };

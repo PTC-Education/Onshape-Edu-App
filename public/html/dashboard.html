@@ -3,10 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title>Onshape 3D Printer Dashboard</title>
-  
-  <script src="../client/acorn.js" charset="utf-8"></script>
-  <script src="../client/interpreter.js" charset="utf-8"></script>
-  <script src="../client/msg/js/en.js" charset="utf-8"></script>
 
   <style id = 'interface' media="screen">
   body {
@@ -42,21 +38,43 @@
 <h2>hello world</h2>
 Dashboard for visualizing 3D printer info
 <button id="updateButton" onclick="runCode(true); return">Update Info</button>
+
+<form id="formElem">
+    <input type="text" name="name" value="John">
+    <input type="text" name="surname" value="Smith">
+    <input type="submit">
+</form>
+  
+<script>
+formElem.onsubmit = async (e) => {
+    e.preventDefault();
+
+    var inputData = new FormData(formElem);
+
+    let result = await response.json();
+
+    alert(inputData.get('name'));
+};
+</script>
+
 </body>
 
-<!-- <script src="../appStorage.js" charset="utf-8"></script>
-<script src="../appFeatureList.js" charset="utf-8"></script>
-<script src="../appExportStudio.js" charset="utf-8"></script>
-<script src="../appAssembly.js" charset="utf-8"></script> -->
 <script src="../appDashboard.js" charset="utf-8"></script>
 
 <script>
 
-
 // Update the workspace with the last saved workspace
 getDashboardAppElementInfo()
-  .then((value) => getJSONTree(value.applicationID)
-  .then((value) => consol.log(value)));
+  .then((value) => {var tree = getJSONTree(value.applicationId);
+                    localStorage.setItem('applicationId',value.applicationId);
+                    return tree})
+  .then((value) => {localStorage.setItem('jsonTree',value);
+      consol.log(value['tree']['image'])});
+
+function jsonTreeUpdate(form) {
+    form.
+    updateJSONTreeKey(localStorage.getItem('applicationId'),localStorage.getItem('jsonTree')['changeId'],key,value)
+}
 
 </script>
 </html>
