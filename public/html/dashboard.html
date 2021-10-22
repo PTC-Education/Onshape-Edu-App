@@ -37,10 +37,13 @@
 <body>
 <h2>hello world</h2>
 Dashboard for visualizing 3D printer info
-<button id="updateButton" onclick="runCode(true); return">Update Info</button>
-
+<button id="updateButton" onclick="runCode(); return">Update Info</button>
+<div id="printerImage">
+</div>
 <form id="formElem">
+    <label for="key">Key Name</label>
     <input type="text" name="name" value="John">
+    <label for="key">Key Value</label>
     <input type="text" name="surname" value="Smith">
     <input type="submit">
 </form>
@@ -51,7 +54,7 @@ formElem.onsubmit = async (e) => {
 
     var inputData = new FormData(formElem);
 
-    alert(inputData.get('name'));
+    updateJSONTreeKey(localStorage.getItem('applicationId'),localStorage.getItem('jsonTree')['changeId'],key,value)
 };
 </script>
 
@@ -69,9 +72,14 @@ getDashboardAppElementInfo()
   .then((value) => {localStorage.setItem('jsonTree',JSON.stringify(value));
       console.log(value['tree']['image'])});
 
-function jsonTreeUpdate(form) {
-    form.
-    updateJSONTreeKey(localStorage.getItem('applicationId'),localStorage.getItem('jsonTree')['changeId'],key,value)
+
+function showImage() {
+    console.log("<img src='"+localStorage.getItem('jsonTree')['tree']['image']+"'>")
+    document.getElementById("printerImage").innerHTML = "<img src='"+localStorage.getItem('jsonTree')['tree']['image']+"'>"
+}
+
+function runCode() {
+    showImage()
 }
 
 </script>
