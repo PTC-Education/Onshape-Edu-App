@@ -43,9 +43,9 @@ Dashboard for visualizing 3D printer info
 </div>
 <form id="formElem">
     <label for="key">Key Name</label>
-    <input type="text" name="name" value="John">
+    <input type="text" name="key" value="John">
     <label for="key">Key Value</label>
-    <input type="text" name="surname" value="Smith">
+    <input type="text" name="value" value="Smith">
     <input type="submit">
 </form>
   
@@ -54,7 +54,8 @@ formElem.onsubmit = async (e) => {
     e.preventDefault();
 
     var inputData = new FormData(formElem);
-
+    var key = inputData.get('key');
+    var value = inputData.get('value')
     updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],key,value)
 };
 </script>
