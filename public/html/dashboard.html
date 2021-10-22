@@ -66,7 +66,7 @@ getDashboardAppElementInfo()
   .then((value) => {var tree = getJSONTree(value.applicationId);
                     localStorage.setItem('applicationId',value.applicationId);
                     return tree})
-  .then((value) => {localStorage.setItem('jsonTree',value);
+  .then((value) => {localStorage.setItem('jsonTree',JSON.stringify(value));
       console.log(value['tree']['image'])});
 
 function jsonTreeUpdate(form) {
