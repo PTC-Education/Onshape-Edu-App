@@ -74,7 +74,8 @@ getDashboardAppElementInfo()
 
 
 function showImage() {
-    console.log("<img src='"+localStorage.getItem('jsonTree')['tree']['image']+"'>")
+    console.log(localStorage.getItem('jsonTree')['tree']['image'])
+    // console.log("<img src='"+localStorage.getItem('jsonTree')['tree']['image']+"'>")
     document.getElementById("printerImage").innerHTML = "<img src='"+localStorage.getItem('jsonTree')['tree']['image']+"'>"
 }
 
