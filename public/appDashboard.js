@@ -21,7 +21,7 @@ async function getJSONTree(applicationID) {
 */
 async function hasDashboardStorage(elementList){
     for (var i = 0; i < elementList.length; i++) {
-      if (elementList[i].name == "Dashboard Storage") {
+      if (elementList[i].name == "Octoprint AppElement") {
         var hasStudio = true
         var index = i
         return {
