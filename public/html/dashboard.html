@@ -35,11 +35,13 @@
 </head>
 
 <body>
-<h2>hello world</h2>
-Dashboard for visualizing 3D printer info
+<h2>3D Printer Dashboard</h2>
+Dashboard for remotely monitoring and controlling a 3D printer through a Raspberry Pi running Octoprint and the Onshape-3D-Printer python app.
 <button id="updateButton" onclick="runCode(); return">Update Info</button>
 <div id="printerImage">
     <img src="">
+</div>
+<div id="printerInfo">
 </div>
 <form id="formElem">
     <label for="key">Key Name</label>
@@ -72,7 +74,8 @@ getDashboardAppElementInfo()
                     localStorage.setItem('applicationId',value.applicationId);
                     return tree})
   .then((value) => {localStorage.setItem('jsonTree',JSON.stringify(value));
-      console.log(value['tree']['image'])});
+      console.log(value['tree']['image'])})
+  .then(() => {})
 
 
 function showImage() {
@@ -82,8 +85,36 @@ function showImage() {
     document.getElementById("printerImage").innerHTML = "<img src='"+jsonTree['tree']['image']+"' width=400>"
 }
 
+function updatePrinterInfo() {
+    var jsonTree = JSON.parse(localStorage.getItem('jsonTree'));
+    var printerState = jsonTree['tree']['printerInfo']['state']['text']
+    var nozzleTarget = jsonTree['tree']['printerInfo']['temperature']['tool0']['target']
+    var nozzleActual = jsonTree['tree']['printerInfo']['temperature']['tool0']['actual']
+    var bedTarget = jsonTree['tree']['printerInfo']['temperature']['bed']['target']
+    var bedActual = jsonTree['tree']['printerInfo']['temperature']['bed']['actual']
+    var jobState = jsonTree['tree']['jobInfo']['state']
+    var jobFileName = jsonTree['tree']['jobInfo']['job']['file']['name']
+    var jobProgress = jsonTree['tree']['jobInfo']['job']['progress']['completion']
+    var defaultText = `<ul>
+      <li>Printer State: ${str(printerState)}</li>
+      <li>Temperature:
+        <ul>
+          <li> Nozzle Actual Temp: ${str(nozzleActual)}</li>
+          <li> Nozzle Target Temp: ${str(nozzleTarget)}</li>
+          <li> Bed Actual Temp: ${str(bedActual)}</li>
+          <li> Bed Target Temp: ${str(bedTarget)}</li>
+        </ul></li>
+      <li>Job State: ${jobState}</li>
+      <li>File Name: ${jobFileName}</li>
+      <li>Completion Percentage: ${str(jobProgress)}</li>
+    </ul>`
+    console.log(defaultText)
+    document.getElementById("printerInfo").innerHTML = defaultText
+}
+
 function runCode() {
-    showImage()
+  updatePrinterInfo();  
+  showImage();
 }
 
 </script>
