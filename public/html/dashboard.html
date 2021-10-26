@@ -94,7 +94,7 @@ function updatePrinterInfo() {
     var bedActual = jsonTree['tree']['printerInfo']['temperature']['bed']['actual']
     var jobState = jsonTree['tree']['jobInfo']['state']
     var jobFileName = jsonTree['tree']['jobInfo']['job']['file']['name']
-    var jobProgress = jsonTree['tree']['jobInfo']['job']['progress']['completion']
+    var jobProgress = jsonTree['tree']['jobInfo']['progress']['completion']
     var defaultText = `<ul>
       <li>Printer State: ${str(printerState)}</li>
       <li>Temperature:
