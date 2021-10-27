@@ -73,20 +73,19 @@ getDashboardAppElementInfo()
   .then((value) => {var tree = getJSONTree(value.applicationId);
                     localStorage.setItem('applicationId',value.applicationId);
                     return tree})
-  .then((value) => {localStorage.setItem('jsonTree',JSON.stringify(value));
-      console.log(value['tree']['image'])})
-  .then(() => {})
+  .then((value) => {localStorage.setItem('jsonTree',JSON.stringify(value))})
+  .then(() => {runCode()})
 
 
-function showImage() {
-    var jsonTree = JSON.parse(localStorage.getItem('jsonTree'));
+function showImage(jsonTree) {
+    // var jsonTree = JSON.parse(localStorage.getItem('jsonTree'));
     // console.log(jsonTree['tree']['image']);
     // console.log("<img src='"+localStorage.getItem('jsonTree')['tree']['image']+"'>")
     document.getElementById("printerImage").innerHTML = "<img src='"+jsonTree['tree']['image']+"' width=400>"
 }
 
-function updatePrinterInfo() {
-    var jsonTree = JSON.parse(localStorage.getItem('jsonTree'));
+function updatePrinterInfo(jsonTree) {
+    // var jsonTree = JSON.parse(localStorage.getItem('jsonTree'));
     var printerState = jsonTree['tree']['printerInfo']['state']['text']
     var nozzleTarget = jsonTree['tree']['printerInfo']['temperature']['tool0']['target']
     var nozzleActual = jsonTree['tree']['printerInfo']['temperature']['tool0']['actual']
@@ -108,13 +107,17 @@ function updatePrinterInfo() {
       <li>File Name: ${jobFileName}</li>
       <li>Completion Percentage: ${jobProgress.toString()}</li>
     </ul>`
-    console.log(defaultText)
     document.getElementById("printerInfo").innerHTML = defaultText
 }
 
 function runCode() {
-  updatePrinterInfo();  
-  showImage();
+  getDashboardAppElementInfo()
+  .then((value) => {var tree = getJSONTree(value.applicationId);
+                    // localStorage.setItem('applicationId',value.applicationId);
+                    return tree})
+  .then((value) => {updatePrinterInfo(value);  
+                    showImage(value);})
+  
 }
 
 </script>
