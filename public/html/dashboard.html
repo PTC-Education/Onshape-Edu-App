@@ -99,14 +99,14 @@ function updatePrinterInfo() {
       <li>Printer State: ${str(printerState)}</li>
       <li>Temperature:
         <ul>
-          <li> Nozzle Actual Temp: ${str(nozzleActual)}</li>
-          <li> Nozzle Target Temp: ${str(nozzleTarget)}</li>
-          <li> Bed Actual Temp: ${str(bedActual)}</li>
-          <li> Bed Target Temp: ${str(bedTarget)}</li>
+          <li> Nozzle Actual Temp: ${nozzleActual.toString()}</li>
+          <li> Nozzle Target Temp: ${nozzleTarget.toString()}</li>
+          <li> Bed Actual Temp: ${bedActual.toString()}</li>
+          <li> Bed Target Temp: ${bedTarget.toString()}</li>
         </ul></li>
       <li>Job State: ${jobState}</li>
       <li>File Name: ${jobFileName}</li>
-      <li>Completion Percentage: ${str(jobProgress)}</li>
+      <li>Completion Percentage: ${jobProgress.toString()}</li>
     </ul>`
     console.log(defaultText)
     document.getElementById("printerInfo").innerHTML = defaultText
