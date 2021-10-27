@@ -96,7 +96,7 @@ function updatePrinterInfo() {
     var jobFileName = jsonTree['tree']['jobInfo']['job']['file']['name']
     var jobProgress = jsonTree['tree']['jobInfo']['progress']['completion']
     var defaultText = `<ul>
-      <li>Printer State: ${str(printerState)}</li>
+      <li>Printer State: ${printerState.toString()}</li>
       <li>Temperature:
         <ul>
           <li> Nozzle Actual Temp: ${nozzleActual.toString()}</li>
