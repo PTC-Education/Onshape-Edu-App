@@ -96,7 +96,7 @@ getDashboardAppElementInfo()
   })
 
 async function populatePartStudioDropdown(partStudioArray) {
-  const string = ''
+  var string = ''
 
   for(let i=0; i<partStudioArray.length; i++) {
     string += '<option value="'+partStudioArray[i]['id']+'>'+partStudioArray[i]['name']+'</option>'
@@ -106,7 +106,7 @@ async function populatePartStudioDropdown(partStudioArray) {
 }
 
 async function updatePartStudioDropdown(partStudioArray) {
-  console.log(partStudioArray)
+  // console.log(partStudioArray)
   var html = await populatePartStudioDropdown(partStudioArray)
   document.getElementById("partStudio").innerHTML = html
 }
