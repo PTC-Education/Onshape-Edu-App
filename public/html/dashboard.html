@@ -119,6 +119,7 @@ async function runCode() {
   document.getElementById('updateButton').style.backgroundColor = "rgba(192, 192, 192, 0.5)"
   document.getElementById('updateButton').innerHTML = "Waiting for update..."
   document.getElementById('updateButton').style.color = "rgb(0, 0, 0)"
+  updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"updateInfo","update")
   var applicationID = localStorage.getItem('applicationId')
   var updated = false;
   while (updated = false) {
