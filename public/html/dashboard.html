@@ -105,7 +105,7 @@ function updatePrinterInfo(jsonTree) {
         </ul></li>
       <li>Job State: ${jobState}</li>
       <li>File Name: ${jobFileName}</li>
-      <li>Completion Percentage: ${MATH.round(jobProgress).toString()}</li>
+      <li>Completion Percentage: ${Math.round(jobProgress).toString()}</li>
     </ul>`
     document.getElementById("printerInfo").innerHTML = defaultText
 }
