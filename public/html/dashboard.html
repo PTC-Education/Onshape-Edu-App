@@ -128,11 +128,16 @@ var OctoprintPollRate = 10000;
 function checkInfoUpdate() {
   console.log('init update')
   setTimeout(function() {
-    const tree = getJSONTree(localStorage.getItem('applicationId'))
-    console.log(tree)
-    localStorage.setItem('jsonTree',JSON.stringify(tree))
-    updateInfo(tree)
-    console.log('updated')
+    getJSONTree(localStorage.getItem('applicationId'))
+      .then((value) => {
+        console.log(value)
+        localStorage.setItem('jsonTree',JSON.stringify(value))
+        updateInfo(value)
+        console.log('updated')
+        document.getElementById('updateButton').style.backgroundColor = "rgba(255, 255, 255, 0.5)"
+        document.getElementById('updateButton').innerHTML = "Update Info"
+        document.getElementById('updateButton').style.color = "rgb(153, 153, 153)"
+      })
   },OctoprintPollRate)
 }
 
