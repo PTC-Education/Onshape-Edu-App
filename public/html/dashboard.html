@@ -40,24 +40,37 @@
 <div id="printerImage">
     <h3>Loading...</h3>
 </div>
+<div id="printQueue">
+  <form id="addToPrintQueue">
+    <label for="partStudio">Select Part Studio</label>
+
+    <select name="partStudio" id="partStudio" onchange="populateDropdown()">
+      <option value="-1">--</option>
+      <option value="1">studio1</option>
+    </select>
+    <label for="configs">Select Configuration (if available)</label>
+
+    <select name="configs" id="configs">
+      <option value="-1">--</option>
+    </select>
+  </form>
+</div>
 <div id="printerInfo">
 </div>
-<form id="formElem">
-    <label for="key">Key Name</label>
-    <input type="text" name="key" value="John">
-    <label for="key">Key Value</label>
-    <input type="text" name="value" value="Smith">
+
+<form id="printCommand">
+    <label for="key">Input Print Command (i.e. "home", "stop print", "preheatPLA", etc): </label>
+    <input type="text" name="value" value="">
     <input type="submit">
 </form>
   
 <script>
-formElem.onsubmit = async (e) => {
+printCommand.onsubmit = async (e) => {
     e.preventDefault();
 
     var inputData = new FormData(formElem);
-    var key = inputData.get('key');
     var value = inputData.get('value')
-    updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],key,value)
+    updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printerCommand",value)
 };
 </script>
 
@@ -76,6 +89,20 @@ getDashboardAppElementInfo()
                     return value})
   .then((value) => {updateInfo(value)})
 
+getPartStudios()
+  .then((value) => {
+    localStorage.setItem('partStudioList',JSON.stringify(value));
+  })
+
+function populateDropdown() {
+  var string = ```
+    <option value="default"></option>
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>```
+document.getElementById("configs").innerHTML = string
+}
 
 function showImage(jsonTree) {
     // var jsonTree = JSON.parse(localStorage.getItem('jsonTree'));

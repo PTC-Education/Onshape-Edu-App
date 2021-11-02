@@ -53,6 +53,20 @@ async function getAppElementIDs() {
   };
 
 /*
+ Gets the part studios in the document
+*/
+
+async function getPartStudios() {
+  try {
+      const response = await fetch(`/api/getPartStudios${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+      const partstudios = await response.json();
+      return partstudios;
+  } catch (error) {
+      console.error(error);
+  }
+};
+
+/*
  Combines all utility functions into one function that deals with creation and upkeep of the
  app element 
 */
