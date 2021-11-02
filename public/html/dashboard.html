@@ -95,13 +95,12 @@ getPartStudios()
   })
 
 function populateDropdown() {
-  var string = ```
+  document.getElementById("configs").innerHTML = `
     <option value="default"></option>
     <option value="volvo">Volvo</option>
     <option value="saab">Saab</option>
     <option value="opel">Opel</option>
-    <option value="audi">Audi</option>```
-document.getElementById("configs").innerHTML = string
+    <option value="audi">Audi</option>`
 }
 
 function showImage(jsonTree) {
