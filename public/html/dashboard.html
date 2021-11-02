@@ -92,26 +92,29 @@ getDashboardAppElementInfo()
 getPartStudios()
   .then((value) => {
     localStorage.setItem('partStudioList',JSON.stringify(value));
+    updatePartStudioDropdown(value);
   })
 
-function populateDropdown() {
-  document.getElementById("configs").innerHTML = `
-    <option value="default"></option>
-    <option value="volvo">Volvo</option>
-    <option value="saab">Saab</option>
-    <option value="opel">Opel</option>
-    <option value="audi">Audi</option>`
+async function populatePartStudioDropdown(partStudioArray) {
+  const string = ''
+
+  for(let i=0; i<partStudioArray.length; i++) {
+    string += '<option value="'+partStudioArray[i]['id']+'>'+partStudioArray[i]['name']+'</option>'
+  }
+  console.log(string)
+  return string
+}
+
+async function updatePartStudioDropdown(partStudioArray) {
+  var html = await populatePartStudioDropdown(partStudioArray)
+  document.getElementById("partStudio").innerHTML = html
 }
 
 function showImage(jsonTree) {
-    // var jsonTree = JSON.parse(localStorage.getItem('jsonTree'));
-    // console.log(jsonTree['tree']['image']);
-    // console.log("<img src='"+localStorage.getItem('jsonTree')['tree']['image']+"'>")
     document.getElementById("printerImage").innerHTML = "<img src='"+jsonTree['tree']['image']+"' width=400>"
 }
 
 function updatePrinterInfo(jsonTree) {
-    // var jsonTree = JSON.parse(localStorage.getItem('jsonTree'));
     var printerState = jsonTree['tree']['printerInfo']['state']['text']
     var nozzleTarget = jsonTree['tree']['printerInfo']['temperature']['tool0']['target']
     var nozzleActual = jsonTree['tree']['printerInfo']['temperature']['tool0']['actual']
@@ -156,7 +159,6 @@ function checkInfoUpdate() {
   setTimeout(function() {
     getJSONTree(localStorage.getItem('applicationId'))
       .then((value) => {
-        console.log(value)
         localStorage.setItem('jsonTree',JSON.stringify(value))
         updateInfo(value)
         console.log('updated')
