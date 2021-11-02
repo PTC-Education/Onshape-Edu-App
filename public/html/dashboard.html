@@ -123,28 +123,13 @@ async function runCode() {
   checkInfoUpdate()
 }
 
-var checkInfoUpdate2 = function(){
-  var tree = getJSONTree(value.applicationId)
-  if (JSON.stringify(tree) == localStorage.getItem('jsonTree')) {
-    updateInfo(tree)
-    document.getElementById('updateButton').style.backgroundColor = "rgba(255, 255, 255, 0.5)"
-    document.getElementById('updateButton').innerHTML = "Update Info"
-    document.getElementById('updateButton').style.color = "rgb(153, 153, 153)"
-    console.log("updated!")
-    return true
-  }
-  else{
-    return false
-  }
-  console.log("checked Info")
-}
-
 var OctoprintPollRate = 10000;
 
 function checkInfoUpdate() {
   console.log('init update')
   setTimeout(function() {
-    var tree = getJSONTree(localStorage.getItem('applicationId'))
+    const tree = getJSONTree(localStorage.getItem('applicationId'))
+    console.log(tree)
     localStorage.setItem('jsonTree',JSON.stringify(tree))
     updateInfo(tree)
     console.log('updated')
