@@ -120,20 +120,35 @@ async function runCode() {
   document.getElementById('updateButton').innerHTML = "Waiting for update..."
   document.getElementById('updateButton').style.color = "rgb(0, 0, 0)"
   updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"updateInfo","update")
-  var applicationID = localStorage.getItem('applicationId')
-  var updated = false;
-  while (updated = false) {
-    var tree = getJSONTree(value.applicationId)
-    if (JSON.stringify(tree) == localStorage.getItem('jsonTree')) {
-      updated = true;
-      updateInfo(tree)
-      document.getElementById('updateButton').style.backgroundColor = "rgba(255, 255, 255, 0.5)"
-      document.getElementById('updateButton').innerHTML = "Update Info"
-      document.getElementById('updateButton').style.color = "rgb(153, 153, 153)"
-      console.log("updated!")
-    }
-    setTimeout(function(){console.log("update loop")}, 5000);
+  checkInfoUpdate()
+}
+
+var checkInfoUpdate2 = function(){
+  var tree = getJSONTree(value.applicationId)
+  if (JSON.stringify(tree) == localStorage.getItem('jsonTree')) {
+    updateInfo(tree)
+    document.getElementById('updateButton').style.backgroundColor = "rgba(255, 255, 255, 0.5)"
+    document.getElementById('updateButton').innerHTML = "Update Info"
+    document.getElementById('updateButton').style.color = "rgb(153, 153, 153)"
+    console.log("updated!")
+    return true
   }
+  else{
+    return false
+  }
+  console.log("checked Info")
+}
+
+var OctoprintPollRate = 10000;
+
+function checkInfoUpdate() {
+  console.log('init update')
+  setTimeout(function() {
+    var tree = getJSONTree(localStorage.getItem('applicationId'))
+    localStorage.setItem('jsonTree',JSON.stringify(tree))
+    updateInfo(tree)
+    console.log('updated')
+  },OctoprintPollRate)
 }
 
 </script>
