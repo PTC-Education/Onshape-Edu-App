@@ -86,10 +86,10 @@ getDashboardAppElementInfo()
                     localStorage.setItem('applicationId',value.applicationId);
                     return tree})
   .then((value) => {localStorage.setItem('jsonTree',JSON.stringify(value));
+                    updateInfo(value);
                     return value})
-  .then((value) => {updateInfo(value)})
-
-getPartStudios()
+  .then(() => {var partStudioList = getPartStudios();
+              return partStudioList})
   .then((value) => {
     localStorage.setItem('partStudioList',JSON.stringify(value));
     updatePartStudioDropdown(value);
@@ -106,6 +106,7 @@ async function populatePartStudioDropdown(partStudioArray) {
 }
 
 async function updatePartStudioDropdown(partStudioArray) {
+  console.log(partStudioArray)
   var html = await populatePartStudioDropdown(partStudioArray)
   document.getElementById("partStudio").innerHTML = html
 }
