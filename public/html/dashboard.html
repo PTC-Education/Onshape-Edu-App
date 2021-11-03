@@ -22,9 +22,6 @@
     font-family: "Flama", "Open Sans","Helvetica Neue","Helvetica","Arial","sans-serif";
   }
   #updateButton {
-    position: absolute;
-    top: 30px;
-    right: 30px;
     padding: 10px;
     background-color: rgba(255, 255, 255, 50%);
     color: #999;
@@ -36,32 +33,38 @@
 
 <body>
 <h2>3D Printer Dashboard</h2>
-<button id="updateButton" onclick="runCode(); return">Update Info</button>
+<!-- <button id="updateButton" onclick="runCode(); return">Update Info</button> -->
 <div id="printerImage">
     <h3>Loading...</h3>
+</div>
+<div id="printerInfo">
+    <h3>Loading...</h3>
+</div>
+<div>
+  <form id="updateInfo">
+    <label for="updateRate">Input the time (in seconds) that the RPi pings Onshape</label>
+    <input type="number" name="updateRate" value="10">
+    <input type="submit" id="updateButton" value="Update Info">
+  </form>
 </div>
 <div id="printQueue">
   <form id="addToPrintQueue">
     <label for="partStudio">Select Part Studio</label>
-
-    <select name="partStudio" id="partStudio" onchange="populateDropdown()">
-      <option value="-1">--</option>
-      <option value="1">studio1</option>
-    </select>
-    <label for="configs">Select Configuration (if available)</label>
-
-    <select name="configs" id="configs">
+    <select name="partStudio" id="partStudio">
       <option value="-1">--</option>
     </select>
+    <label for="configs">Enter full configuration string (leave blank for default)</label>
+    <input type="text" name="configs" value="">
+    <label for="configs">Enter slicing configuration file</label>
+    <input type="text" name="slicingConfig" value="">
+    <input type="submit" value="Add to queue">
   </form>
 </div>
-<div id="printerInfo">
-</div>
-
+<br>
 <form id="printCommand">
     <label for="key">Input Print Command (i.e. "home", "stop print", "preheatPLA", etc): </label>
     <input type="text" name="value" value="">
-    <input type="submit">
+    <input type="submit" value="Update Info" id="">
 </form>
   
 <script>
@@ -72,6 +75,16 @@ printCommand.onsubmit = async (e) => {
     var value = inputData.get('value')
     updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printerCommand",value)
 };
+</script>
+
+<script>
+  updateInfo.onsubmit = async (e) => {
+      e.preventDefault();
+  
+      var inputData = new FormData(formElem);
+      var value = inputData.get('updateRate')
+      update(value*1000)
+  };
 </script>
 
 </body>
@@ -106,10 +119,25 @@ async function populatePartStudioDropdown(partStudioArray) {
 }
 
 async function updatePartStudioDropdown(partStudioArray) {
-  // console.log(partStudioArray)
   var html = await populatePartStudioDropdown(partStudioArray)
   document.getElementById("partStudio").innerHTML = html
 }
+
+/* to fix - add interactive dropdown for configurations of part studio */
+// async function populateConfigDropdown(configArray) {
+//   var string = ''
+
+//   for(let i=0; i<configArray.length; i++) {
+//     string += '<option value="'+configArray[i]['id']+'>'+configArray[i]['name']+'</option>'
+//   }
+//   console.log(string)
+//   return string
+// }
+
+// async function updateConfigDropdown(configArray) {
+//   var html = await populateConfigDropdown(configArray)
+//   document.getElementById("config").innerHTML = html
+// }
 
 function showImage(jsonTree) {
     document.getElementById("printerImage").innerHTML = "<img src='"+jsonTree['tree']['image']+"' width=400>"
@@ -133,9 +161,8 @@ function updatePrinterInfo(jsonTree) {
           <li> Bed Actual Temp: ${bedActual.toString()}</li>
           <li> Bed Target Temp: ${bedTarget.toString()}</li>
         </ul></li>
-      <li>Job State: ${jobState}</li>
       <li>File Name: ${jobFileName}</li>
-      <li>Completion Percentage: ${Math.round(jobProgress).toString()}</li>
+      <li>Completion Percentage: ${Math.round(jobProgress).toString()}%</li>
     </ul>`
     document.getElementById("printerInfo").innerHTML = defaultText
 }
@@ -145,17 +172,17 @@ async function updateInfo(tree) {
   showImage(tree);
 }
 
-async function runCode() {
+async function update(OctoprintPollRate) {
   document.getElementById('updateButton').style.backgroundColor = "rgba(192, 192, 192, 0.5)"
-  document.getElementById('updateButton').innerHTML = "Waiting for update..."
+  document.getElementById('updateButton').value = "Waiting for update..."
   document.getElementById('updateButton').style.color = "rgb(0, 0, 0)"
   updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"updateInfo","update")
-  checkInfoUpdate()
+  checkInfoUpdate(OctoprintPollRate)
 }
 
 var OctoprintPollRate = 10000;
 
-function checkInfoUpdate() {
+function checkInfoUpdate(OctoprintPollRate) {
   console.log('init update')
   setTimeout(function() {
     getJSONTree(localStorage.getItem('applicationId'))
@@ -164,7 +191,7 @@ function checkInfoUpdate() {
         updateInfo(value)
         console.log('updated')
         document.getElementById('updateButton').style.backgroundColor = "rgba(255, 255, 255, 0.5)"
-        document.getElementById('updateButton').innerHTML = "Update Info"
+        document.getElementById('updateButton').value = "Update Info"
         document.getElementById('updateButton').style.color = "rgb(153, 153, 153)"
       })
   },OctoprintPollRate)

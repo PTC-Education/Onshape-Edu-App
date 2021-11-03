@@ -109,6 +109,13 @@ apiRouter.get('/getFStudio', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${req.query.documentId}/w/${req.query.workspaceId}/elements?elementType=PARTSTUDIO&withThumbnails=false`, req, res);
 });
 
+/**
+ * Get Part Studio configuration
+ */
+ apiRouter.get('/getPartStudioConfigs', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/elements/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.partStudioId}/configuration`, req, res);
+});
+
 
 /**
  * Get the Feature Studio contents from the onshape document

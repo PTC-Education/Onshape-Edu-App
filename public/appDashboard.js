@@ -67,6 +67,20 @@ async function getPartStudios() {
 };
 
 /*
+ Gets part studio configurations
+*/
+
+async function getPartStudioConfigs(partStudioId) {
+  try {
+      const response = await fetch(`/api/getPartStudioConfigs${window.location.search}&partStudioId=${partStudioId}`, { headers: { 'Accept': 'application/json' } })
+      const partstudioConfigs = await response.json();
+      return partstudioConfigs;
+  } catch (error) {
+      console.error(error);
+  }
+};
+
+/*
  Combines all utility functions into one function that deals with creation and upkeep of the
  app element 
 */
