@@ -3,37 +3,53 @@
 <head>
   <meta charset="utf-8">
   <title>Onshape 3D Printer Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
 
   <style id = 'interface' media="screen">
   body {
     padding: 0;
-    margin: 0
+    margin: 10px;
+    font-family: 'Rubik', sans-serif
   }
-  #bannerDiv {
-    position: fixed;
-    width: 100%;
-    height: 40px;
-    z-index: 10;
-    background-color: white;
-    left: 0;
-    bottom: 0;
-    color: #656565;
+  .inputButton {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: antialiased!important;
+    box-sizing: border-box;
+    font: inherit;
+    overflow: visible;
+    text-transform: none;
+    -webkit-appearance: button;
+    font-family: inherit;
+    background: #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.428571429;
     text-align: center;
-    font-family: "Flama", "Open Sans","Helvetica Neue","Helvetica","Arial","sans-serif";
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #1651b0;
+    border-color: #1651b0;
+    margin: 0 4px;
   }
-  #updateButton {
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 50%);
-    color: rgb(31, 30, 30);
-    border-radius: 5px;
-  }
+
+
   </style>
 
 </head>
 
 <body>
 <h2>3D Printer Dashboard</h2>
-<!-- <button id="updateButton" onclick="runCode(); return">Update Info</button> -->
 <div id="printerImage">
     <h3>Loading...</h3>
 </div>
@@ -44,7 +60,7 @@
   <form id="updateInfoForm">
     <label for="updateRate">Input the RPi ping rate (in seconds)</label>
     <input type="number" name="updateRate" value="10" style="width:40px">
-    <input type="submit" id="updateButton" value="Update Info">
+    <input type="submit" id="updateButton" value="Update Info" class="inputButton">
   </form>
 </div><br><br>
 <div id="printQueue">
@@ -55,16 +71,16 @@
     </select><br>
     <label for="configs">Enter full configuration string (leave blank for default)</label>
     <input type="text" name="configs" value=""><br>
-    <label for="sliceConfig">Enter slicing configuration file</label>
-    <input type="text" name="sliceConfig" value=""><br>
-    <input type="submit" value="Add to queue">
+    <!-- <label for="sliceConfig">Enter slicing configuration file</label>
+    <input type="text" name="sliceConfig" value=""><br> -->
+    <input type="submit" value="Add to queue" class="inputButton">
   </form>
 </div>
 <br><br>
 <form id="printCommand">
     <label for="key">Input Print Command (i.e. "home", "stop print", "preheatPLA", etc): </label>
     <input type="text" name="value" value="" size="10"><br>
-    <input type="submit" value="Issue Print Command" id="">
+    <input type="submit" value="Issue Print Command" id="" class="inputButton">
 </form>
   
 <script>
@@ -94,9 +110,10 @@
       var inputData = new FormData(addToPrintQueue);
       var partStudioId = inputData.get('partStudio')
       var configString = inputData.get('configs')
-      var sliceConfig = inputData.get('sliceConfig')
+      // var sliceConfig = inputData.get('sliceConfig')
       var printQueue = localStorage.getItem("jsonTree")['tree']['printQueue']
-      printQueue.push({"eid":partStudioId,"config":configString,"sliceConfig":sliceConfig})
+      // printQueue.push({"eid":partStudioId,"config":configString,"sliceConfig":sliceConfig})
+      printQueue.push({"eid":partStudioId,"config":configString})
       updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printQueue",printQueue)
   };
 </script>
