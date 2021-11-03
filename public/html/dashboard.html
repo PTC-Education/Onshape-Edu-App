@@ -24,7 +24,7 @@
   #updateButton {
     padding: 10px;
     background-color: rgba(255, 255, 255, 50%);
-    color: #999;
+    color: rgb(31, 30, 30);
     border-radius: 5px;
   }
   </style>
@@ -42,28 +42,28 @@
 </div>
 <div>
   <form id="updateInfo">
-    <label for="updateRate">Input the time (in seconds) that the RPi pings Onshape</label>
-    <input type="number" name="updateRate" value="10">
+    <label for="updateRate">Input the RPi ping rate (in seconds)</label>
+    <input type="number" name="updateRate" value="10" size="4">
     <input type="submit" id="updateButton" value="Update Info">
   </form>
-</div>
+</div><br><br>
 <div id="printQueue">
   <form id="addToPrintQueue">
     <label for="partStudio">Select Part Studio</label>
     <select name="partStudio" id="partStudio">
       <option value="-1">--</option>
-    </select>
+    </select><br>
     <label for="configs">Enter full configuration string (leave blank for default)</label>
-    <input type="text" name="configs" value="">
+    <input type="text" name="configs" value=""><br>
     <label for="configs">Enter slicing configuration file</label>
     <input type="text" name="slicingConfig" value="">
     <input type="submit" value="Add to queue">
   </form>
 </div>
-<br>
+<br><br>
 <form id="printCommand">
     <label for="key">Input Print Command (i.e. "home", "stop print", "preheatPLA", etc): </label>
-    <input type="text" name="value" value="">
+    <input type="text" name="value" value="" size="7">
     <input type="submit" value="Update Info" id="">
 </form>
   
@@ -71,7 +71,7 @@
 printCommand.onsubmit = async (e) => {
     e.preventDefault();
 
-    var inputData = new FormData(formElem);
+    var inputData = new FormData(printCommand);
     var value = inputData.get('value')
     updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printerCommand",value)
 };
@@ -81,7 +81,7 @@ printCommand.onsubmit = async (e) => {
   updateInfo.onsubmit = async (e) => {
       e.preventDefault();
   
-      var inputData = new FormData(formElem);
+      var inputData = new FormData(updateInfo);
       var value = inputData.get('updateRate')
       update(value*1000)
   };
