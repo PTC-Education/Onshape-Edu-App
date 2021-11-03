@@ -43,7 +43,7 @@
 <div>
   <form id="updateInfoForm">
     <label for="updateRate">Input the RPi ping rate (in seconds)</label>
-    <input type="number" name="updateRate" value="10" size="4">
+    <input type="number" name="updateRate" value="10" style="width:40px">
     <input type="submit" id="updateButton" value="Update Info">
   </form>
 </div><br><br>
@@ -55,26 +55,26 @@
     </select><br>
     <label for="configs">Enter full configuration string (leave blank for default)</label>
     <input type="text" name="configs" value=""><br>
-    <label for="configs">Enter slicing configuration file</label>
-    <input type="text" name="slicingConfig" value="">
+    <label for="sliceConfig">Enter slicing configuration file</label>
+    <input type="text" name="sliceConfig" value=""><br>
     <input type="submit" value="Add to queue">
   </form>
 </div>
 <br><br>
 <form id="printCommand">
     <label for="key">Input Print Command (i.e. "home", "stop print", "preheatPLA", etc): </label>
-    <input type="text" name="value" value="" size="7">
-    <input type="submit" value="Update Info" id="">
+    <input type="text" name="value" value="" size="10"><br>
+    <input type="submit" value="Issue Print Command" id="">
 </form>
   
 <script>
-printCommand.onsubmit = async (e) => {
-    e.preventDefault();
+  printCommand.onsubmit = async (e) => {
+      e.preventDefault();
 
-    var inputData = new FormData(printCommand);
-    var value = inputData.get('value')
-    updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printerCommand",value)
-};
+      var inputData = new FormData(printCommand);
+      var value = inputData.get('value')
+      updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printerCommand",value)
+  };
 </script>
 
 <script>
@@ -87,13 +87,27 @@ printCommand.onsubmit = async (e) => {
   };
 </script>
 
+<script>
+  addToPrintQueue.onsubmit = async (e) => {
+      e.preventDefault();
+  
+      var inputData = new FormData(addToPrintQueue);
+      var partStudioId = inputData.get('partStudio')
+      var configString = inputData.get('configs')
+      var sliceConfig = inputData.get('sliceConfig')
+      var printQueue = localStorage.getItem("jsonTree")['tree']['printQueue']
+      printQueue.push({"eid":partStudioId,"config":configString,"sliceConfig":sliceConfig})
+      updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printQueue",printQueue)
+  };
+</script>
+
 </body>
 
 <script src="../appDashboard.js" charset="utf-8"></script>
 
 <script>
 
-// Update the workspace with the last saved workspace
+/* Initialize the workspace with the last saved workspace */
 getDashboardAppElementInfo()
   .then((value) => {var tree = getJSONTree(value.applicationId);
                     localStorage.setItem('applicationId',value.applicationId);
@@ -139,6 +153,16 @@ async function updatePartStudioDropdown(partStudioArray) {
 //   document.getElementById("config").innerHTML = html
 // }
 
+/* Functions for updating printer info */
+
+async function update(OctoprintPollRate) {
+  document.getElementById('updateButton').style.backgroundColor = "rgba(192, 192, 192, 0.5)"
+  document.getElementById('updateButton').value = "Waiting for update..."
+  document.getElementById('updateButton').style.color = "rgb(0, 0, 0)"
+  updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"updateInfo","update")
+  checkInfoUpdate(OctoprintPollRate)
+}
+
 function showImage(jsonTree) {
     document.getElementById("printerImage").innerHTML = "<img src='"+jsonTree['tree']['image']+"' width=400>"
 }
@@ -171,16 +195,6 @@ async function updateInfo(tree) {
   updatePrinterInfo(tree);  
   showImage(tree);
 }
-
-async function update(OctoprintPollRate) {
-  document.getElementById('updateButton').style.backgroundColor = "rgba(192, 192, 192, 0.5)"
-  document.getElementById('updateButton').value = "Waiting for update..."
-  document.getElementById('updateButton').style.color = "rgb(0, 0, 0)"
-  updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"updateInfo","update")
-  checkInfoUpdate(OctoprintPollRate)
-}
-
-var OctoprintPollRate = 10000;
 
 function checkInfoUpdate(OctoprintPollRate) {
   console.log('init update')
