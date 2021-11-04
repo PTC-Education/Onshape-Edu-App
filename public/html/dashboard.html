@@ -111,7 +111,8 @@
       var configString = inputData.get('configs')
       // var sliceConfig = inputData.get('sliceConfig')
       var printQueue = JSON.parse(localStorage.getItem("jsonTree"))['tree']['printQueue']
-      // printQueue.push({"eid":partStudioId,"config":configString,"sliceConfig":sliceConfig})
+      console.log(printQueue)
+      console.log(printQueue.push({"eid":partStudioId,"config":configString,"sliceConfig":sliceConfig}))
       updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printQueue",printQueue.push({"eid":partStudioId,"config":configString}))
 
     };
@@ -145,7 +146,6 @@ async function populatePartStudioDropdown(partStudioArray) {
   for(let i=0; i<partStudioArray.length; i++) {
     string += '<option value="'+partStudioArray[i]['id']+'>'+partStudioArray[i]['name']+'</option>'
   }
-  console.log(string)
   return string
 }
 
@@ -221,9 +221,8 @@ function checkInfoUpdate(OctoprintPollRate) {
         localStorage.setItem('jsonTree',JSON.stringify(value))
         updateInfo(value)
         console.log('updated')
-        document.getElementById('updateButton').style.backgroundColor = "rgba(255, 255, 255, 0.5)"
+        document.getElementById('updateButton').style = ".inputButton"
         document.getElementById('updateButton').value = "Update Info"
-        document.getElementById('updateButton').style.color = "rgb(153, 153, 153)"
       })
   },OctoprintPollRate)
 }
