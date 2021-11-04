@@ -106,16 +106,16 @@
 <script>
   addToPrintQueue.onsubmit = async (e) => {
       e.preventDefault();
-  
       var inputData = new FormData(addToPrintQueue);
       var partStudioId = inputData.get('partStudio')
       var configString = inputData.get('configs')
       // var sliceConfig = inputData.get('sliceConfig')
       var printQueue = localStorage.getItem("jsonTree")['tree']['printQueue']
       // printQueue.push({"eid":partStudioId,"config":configString,"sliceConfig":sliceConfig})
-      printQueue.push({"eid":partStudioId,"config":configString})
-      updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printQueue",printQueue)
-  };
+      updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printQueue",printQueue.push({"eid":partStudioId,"config":configString}))
+
+    };
+  addToPrintQueue.on
 </script>
 
 </body>
