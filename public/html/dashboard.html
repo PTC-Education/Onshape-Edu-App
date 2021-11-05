@@ -115,8 +115,6 @@
       printQueue.push({"eid":partStudioId,"config":configString})
       console.log(printQueue)
       updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printQueue",printQueue);
-      var tree = getJSONTree(localStorage.getItem('applicationId'));
-      localStorage.setItem('jsonTree',JSON.stringify(tree));
   }
 
 async function printQueueUpdate(printQueue){
