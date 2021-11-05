@@ -119,7 +119,7 @@
 
   var printQueueUpdate = function(printQueue){
     updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printQueue",printQueue)
-      .then(() => {var tree = getJSONTree(value.applicationId);
+      .then(() => {var tree = getJSONTree(localStorage.getItem('applicationId'));
                   return tree})
       .then((value) => {localStorage.setItem('jsonTree',JSON.stringify(value));
                     updateInfo(value);
