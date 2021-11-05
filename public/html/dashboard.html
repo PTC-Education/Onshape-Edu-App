@@ -108,14 +108,23 @@
       e.preventDefault();
       var inputData = new FormData(addToPrintQueue);
       var partStudioId = inputData.get('partStudio')
+      console.log(partStudioId)
       var configString = inputData.get('configs')
       // var sliceConfig = inputData.get('sliceConfig')
       var printQueue = JSON.parse(localStorage.getItem("jsonTree"))['tree']['printQueue']
-      printQueue.push(JSON.stringify({"eid":partStudioId,"config":configString}))
+      printQueue.push({"eid":partStudioId,"config":configString})
       console.log(printQueue)
-      updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printQueue",printQueue)
+      printQueueUpdate(printQueue);
+  }
 
-    };
+  var printQueueUpdate = function(printQueue){
+    updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printQueue",printQueue)
+      .then(() => {var tree = getJSONTree(value.applicationId);
+                  return tree})
+      .then((value) => {localStorage.setItem('jsonTree',JSON.stringify(value));
+                    updateInfo(value);
+                    return value})
+  }
 </script>
 
 </body>
