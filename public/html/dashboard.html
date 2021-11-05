@@ -108,16 +108,16 @@
       e.preventDefault();
       var inputData = new FormData(addToPrintQueue);
       var partStudioId = inputData.get('partStudio')
-      console.log(partStudioId)
       var configString = inputData.get('configs')
       // var sliceConfig = inputData.get('sliceConfig')
       var printQueue = JSON.parse(localStorage.getItem("jsonTree"))['tree']['printQueue']
+      console.log(JSON.parse(localStorage.getItem("jsonTree"))['tree']['printQueue'])
       printQueue.push({"eid":partStudioId,"config":configString})
       console.log(printQueue)
       printQueueUpdate(printQueue);
   }
 
-  var printQueueUpdate = function(printQueue){
+async function printQueueUpdate(printQueue){
     updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printQueue",printQueue)
       .then(() => {var tree = getJSONTree(localStorage.getItem('applicationId'));
                   return tree})
