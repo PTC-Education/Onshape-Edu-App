@@ -112,7 +112,7 @@
       // var sliceConfig = inputData.get('sliceConfig')
       var printQueue = JSON.parse(localStorage.getItem("jsonTree"))['tree']['printQueue']
       console.log(printQueue)
-      console.log(printQueue.push({"eid":partStudioId,"config":configString,"sliceConfig":sliceConfig}))
+      console.log(printQueue.push({"eid":partStudioId,"config":configString}))
       updateJSONTreeKey(localStorage.getItem('applicationId'),JSON.parse(localStorage.getItem('jsonTree'))['changeId'],"printQueue",printQueue.push({"eid":partStudioId,"config":configString}))
 
     };
