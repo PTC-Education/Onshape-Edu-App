@@ -111,9 +111,9 @@
       console.log(partStudioId)
       var configString = inputData.get('configs')
       // var sliceConfig = inputData.get('sliceConfig')
-      const printQueue = JSON.parse(localStorage.getItem("jsonTree"))['tree']['printQueue']
+      var printQueue = JSON.parse(localStorage.getItem("jsonTree"))['tree']['printQueue']
       printQueue.push({"eid":partStudioId,"config":configString})
-      console.log(JSON.parse(localStorage.getItem("jsonTree"))['tree']['printQueue'])
+      console.log(printQueue)
       printQueueUpdate(printQueue);
   }
 
