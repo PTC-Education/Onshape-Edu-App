@@ -1,8 +1,6 @@
 const path = require('path');
 const uuid = require('uuid');
 
-import './web/js/index';
-
 const express = require('express');
 
 const session = require('express-session');
@@ -24,7 +22,6 @@ app.set('view engine', 'jade');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'dist')));
-
 
 app.use(bodyParser.json());
 
@@ -100,5 +97,7 @@ app.get('/gltf', (req, res) => {
 });
 
 app.use('/api', require('./api'));
+
+app.use('/index',require('./web/js/index'));
 
 module.exports = app;
