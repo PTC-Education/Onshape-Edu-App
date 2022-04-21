@@ -10,7 +10,7 @@ import {
     sRGBEncoding,
     Box3,
     Vector3
-} from THREE['WEBGL'];
+} from THREE;
 import { WEBGL } from 'three/examples/jsm/WebGL'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls';
