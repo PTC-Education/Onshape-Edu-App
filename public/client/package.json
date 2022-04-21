@@ -2,7 +2,7 @@
   "name": "testing-blockly",
   "version": "0.0.2",
   "description": "A blockly test",
-  "main": "gltfMain.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install": "node update_blockly.js"
