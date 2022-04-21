@@ -1,6 +1,8 @@
 const path = require('path');
 const uuid = require('uuid');
 
+import './web/js/index';
+
 const express = require('express');
 
 const session = require('express-session');
