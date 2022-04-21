@@ -10,10 +10,10 @@ import {
     sRGBEncoding,
     Box3,
     Vector3
-} from 'three';
-import { WEBGL } from 'three/examples/jsm/WebGL.js';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
+} from '../node_modules/three';
+import { WEBGL } from '../node_modules/three/examples/jsm/WebGL.js'
+import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+import { TrackballControls } from '../node_modules/three/examples/jsm/controls/TrackballControls.js';
 
 /**
  * The <select> element that allows the user to pick an item to translate.
