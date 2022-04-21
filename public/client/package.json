@@ -15,5 +15,6 @@
     "scratch",
     "STEM",
     "STEAM"
-  ]
+  ],
+  "type": "module"
 }
