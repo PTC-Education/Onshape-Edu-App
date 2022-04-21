@@ -99,6 +99,4 @@ app.get('/gltf', (req, res) => {
 
 app.use('/api', require('./api'));
 
-app.use('/gltfMain', require('./gltfMain'));
-
 module.exports = app;
