@@ -93,6 +93,10 @@ app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'html', 'dashboard.html'));
 });
 
+app.get('/gltf', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'html', 'gltf.html'));
+});
+
 app.use('/api', require('./api'));
 
 module.exports = app;
