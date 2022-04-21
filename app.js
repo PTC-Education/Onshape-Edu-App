@@ -98,6 +98,6 @@ app.get('/gltf', (req, res) => {
 
 app.use('/api', require('./api'));
 
-app.use('/index',require('./web/js/index'));
+app.use('/index',require('./index'));
 
 module.exports = app;
