@@ -11,9 +11,9 @@ import {
     Box3,
     Vector3
 } from 'three';
-import { WEBGL } from '/three/examples/jsm/WebGL'
-import { GLTFLoader } from '/three/examples/jsm/loaders/GLTFLoader';
-import { TrackballControls } from '/three/examples/jsm/controls/TrackballControls';
+// import { WEBGL } from '/three/examples/jsm/WebGL'
+// import { GLTFLoader } from '/three/examples/jsm/loaders/GLTFLoader';
+// import { TrackballControls } from '/three/examples/jsm/controls/TrackballControls';
 
 /**
  * The <select> element that allows the user to pick an item to translate.
@@ -50,7 +50,7 @@ const initThreeJsElements = function() {
     const pmremGenerator = new PMREMGenerator(renderer);
     pmremGenerator.compileEquirectangularShader();
     
-    const controls = new TrackballControls(camera, renderer.domElement);
+    const controls = new THREE.TrackballControls(camera, renderer.domElement);
     controls.rotateSpeed = 2.0;
     controls.zoomSpeed = 1.2;
     controls.panSpeed = 0.8;
@@ -158,7 +158,7 @@ const initThreeJsElements = function() {
         renderer.render(scene, camera);
     };
 
-    const gltfLoader = new GLTFLoader();
+    const gltfLoader = new THREE.GLTFLoader();
     
     // Without calling `handleResize`, the background is black initially.
     // (Changes to white when something is rendered.)
@@ -226,9 +226,9 @@ const displayError = (msg) => {
     $viewport.insertBefore($msgElem, $viewport.firstChild);
 }
 
-if (!WEBGL.isWebGLAvailable()) {
+if (!THREE.isWebGLAvailable()) {
     console.error('WebGL is not supported in this browser');
-    document.getElementById('gltf-viewport').appendChild(WEBGL.getWebGLErrorMessage());
+    document.getElementById('gltf-viewport').appendChild(THREE.getWebGLErrorMessage());
 }
 
 const { loadGltf } = initThreeJsElements();
