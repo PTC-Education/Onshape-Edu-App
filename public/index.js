@@ -11,9 +11,9 @@ import {
     Box3,
     Vector3
 } from 'three';
-// import { WEBGL } from './jsm/WebGL'
-// import { GLTFLoader } from './jsm/loaders/GLTFLoader';
-// import { TrackballControls } from './jsm/controls/TrackballControls';
+import { WEBGL } from THREE
+import { GLTFLoader } from THREE
+import { TrackballControls } from THREE
 
 /**
  * The <select> element that allows the user to pick an item to translate.
