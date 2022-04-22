@@ -226,9 +226,9 @@ const displayError = (msg) => {
     $viewport.insertBefore($msgElem, $viewport.firstChild);
 }
 
-if (!THREE.isWebGLAvailable()) {
+if (!THREE.isWebGLAvailable) {
     console.error('WebGL is not supported in this browser');
-    document.getElementById('gltf-viewport').appendChild(THREE.getWebGLErrorMessage());
+    document.getElementById('gltf-viewport').appendChild(THREE.getWebGLErrorMessage);
 }
 
 const { loadGltf } = initThreeJsElements();
