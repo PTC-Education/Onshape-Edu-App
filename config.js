@@ -4,7 +4,7 @@ const oauthCallbackUrl = process.env.OAUTH_CALLBACK_URL;
 const oauthClientId = process.env.OAUTH_CLIENT_ID;
 const oauthClientSecret = process.env.OAUTH_CLIENT_SECRET;
 const oauthUrl = process.env.OAUTH_URL;
-const redisToGoUrl = process.env.REDISTOGO_URL;
+const redisUrl = process.env.REDIS_URL;
 const redisHost = process.env.REDIS_HOST;
 const redisPort = process.env.REDIS_PORT;
 const sessionSecret = process.env.SESSION_SECRET;
@@ -85,7 +85,7 @@ if (!isValidHttpUrl(oauthCallbackUrl))                      errors.push('OAUTH_C
 if (!isValidString(oauthClientId))                          errors.push('OAUTH_CLIENT_ID must have content');
 if (!isValidString(oauthClientSecret))                      errors.push('OAUTH_CLIENT_SECRET must have content');
 if (!isValidHttpUrl(oauthUrl))                              errors.push('OAUTH_URL is not a valid HTTP(S) URL');
-if (redisToGoUrl && !isValidUrl(redisToGoUrl, 'redis:'))    errors.push('REDISTOGO_URL is not a valid Redis URL');
+if (redisUrl && !isValidUrl(redisUrl, 'redis:'))            errors.push('REDISTOGO_URL is not a valid Redis URL');
 if (redisHost && !isValidString(redisHost))                 errors.push('REDIS_HOST must have content');
 if (redisPort && !isValidString(redisPort))                 errors.push('REDIS_PORT must have content');
 if (!isValidString(sessionSecret))                          errors.push('SESSION_SECRET must have content');
