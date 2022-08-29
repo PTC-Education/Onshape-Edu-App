@@ -131,7 +131,7 @@ module.exports = {
     /**
      * The URL of the Redis To Go add-on (if deployed in Heroku). This may be `undefined`.
      */
-    redisToGoUrl,
+    redisUrl,
     
     /**
      * The URL of the Redis host. This may be `undefined`.
