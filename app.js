@@ -85,7 +85,7 @@ app.get('/grantDenied', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'html', 'gltf.html'));
+    res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'));
 });
 
 app.get('/dashboard', (req, res) => {
