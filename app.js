@@ -41,7 +41,8 @@ app.use(session({
         httpOnly: true,
         path: '/',
         maxAge: 1000 * 60 * 60 * 24 // 1 day
-    }
+    },
+    state: {}
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -69,14 +70,12 @@ app.use('/oauthSignin', (req, res) => {
         elId: req.query.elementId
     };
     req.session.state = state;
-    localStorage.setItem('DID',JSON.stringify(req.query.documentId));
-    localStorage.setItem('WID',JSON.stringify(req.query.workspaceId));
-    localStorage.setItem('EID',JSON.stringify(req.query.elementId));
     return passport.authenticate('onshape', { state: uuid.v4(state) })(req, res);
 }, (req, res) => { /* redirected to Onshape for authentication */ });
 
 app.use('/oauthRedirect', passport.authenticate('onshape', { failureRedirect: '/grantDenied' }), (req, res) => {
-    res.redirect(`/?documentId=${JSON.parse(localStorage.getItem('DID'))}&workspaceId=${JSON.parse(localStorage.getItem('WID'))}&elementId=${JSON.parse(localStorage.getItem('EID'))}`);
+    console.log(req.session.state);
+    res.redirect(`/?documentId=${req.session.state.docId}&workspaceId=${req.session.state.workId}&elementId=${req.session.state.elId}`);
 });
 
 // app.use('/oauthRedirectDashboard', passport.authenticate('onshape', { failureRedirect: '/grantDenied' }), (req, res) => {
