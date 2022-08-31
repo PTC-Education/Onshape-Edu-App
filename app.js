@@ -75,7 +75,7 @@ app.use('/oauthSignin', (req, res) => {
 
 app.use('/oauthRedirect', passport.authenticate('onshape', { failureRedirect: '/grantDenied' }), (req, res) => {
     console.log(req.session.state);
-    res.redirect(`/?documentId=${req.session.state.docId}&workspaceId=${req.session.state.workId}&elementId=${req.session.state.elId}`);
+    res.redirect(`/`);
 });
 
 // app.use('/oauthRedirectDashboard', passport.authenticate('onshape', { failureRedirect: '/grantDenied' }), (req, res) => {
