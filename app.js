@@ -41,8 +41,7 @@ app.use(session({
         httpOnly: true,
         path: '/',
         maxAge: 1000 * 60 * 60 * 24 // 1 day
-    },
-    state: {}
+    }
 }));
 app.use(passport.initialize());
 app.use(passport.session());

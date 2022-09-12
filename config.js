@@ -30,7 +30,7 @@ const webhookCallbackRootUrl = process.env.WEBHOOK_CALLBACK_ROOT_URL;
  * @returns {boolean} `true` if the given string is a valid URL, and has one of the
  *      given protocols (if provided); or `false` otherwise.
  */
-const isValidUrl = function(stringToTest, protocols) {
+const isValidUrl = function (stringToTest, protocols) {
     try {
         const url = new URL(stringToTest);
         if (!protocols) {
@@ -79,17 +79,17 @@ const isValidString = function(stringToTest) {
 // We will check the entire configuration and only throw one error (if invalid).
 const errors = [];
 
-if (port && !isValidString(port))                           errors.push('PORT must have content');
-if (!isValidHttpUrl(onshapeApiUrl))                         errors.push('API_URL is not a valid HTTP(S) URL');
-if (!isValidHttpUrl(oauthCallbackUrl))                      errors.push('OAUTH_CALLBACK_URL is not a valid HTTP(S) URL');
-if (!isValidString(oauthClientId))                          errors.push('OAUTH_CLIENT_ID must have content');
-if (!isValidString(oauthClientSecret))                      errors.push('OAUTH_CLIENT_SECRET must have content');
-if (!isValidHttpUrl(oauthUrl))                              errors.push('OAUTH_URL is not a valid HTTP(S) URL');
-if (redisUrl && !isValidUrl(redisUrl, 'redis:'))            errors.push('REDISTOGO_URL is not a valid Redis URL');
-if (redisHost && !isValidString(redisHost))                 errors.push('REDIS_HOST must have content');
-if (redisPort && !isValidString(redisPort))                 errors.push('REDIS_PORT must have content');
-if (!isValidString(sessionSecret))                          errors.push('SESSION_SECRET must have content');
-if (!isValidHttpUrl(webhookCallbackRootUrl))                errors.push('WEBHOOK_CALLBACK_ROOT_URL is not a valid HTTP(S) URL');
+if (port && !isValidString(port)) errors.push('PORT must have content');
+if (!isValidHttpUrl(onshapeApiUrl)) errors.push('API_URL is not a valid HTTP(S) URL');
+if (!isValidHttpUrl(oauthCallbackUrl)) errors.push('OAUTH_CALLBACK_URL is not a valid HTTP(S) URL');
+if (!isValidString(oauthClientId)) errors.push('OAUTH_CLIENT_ID must have content');
+if (!isValidString(oauthClientSecret)) errors.push('OAUTH_CLIENT_SECRET must have content');
+if (!isValidHttpUrl(oauthUrl)) errors.push('OAUTH_URL is not a valid HTTP(S) URL');
+if (redisUrl && !isValidUrl(redisUrl, 'redis:')) errors.push('REDISTOGO_URL is not a valid Redis URL');
+if (redisHost && !isValidString(redisHost)) errors.push('REDIS_HOST must have content');
+if (redisPort && !isValidString(redisPort)) errors.push('REDIS_PORT must have content');
+if (!isValidString(sessionSecret)) errors.push('SESSION_SECRET must have content');
+if (!isValidHttpUrl(webhookCallbackRootUrl)) errors.push('WEBHOOK_CALLBACK_ROOT_URL is not a valid HTTP(S) URL');
 
 // Halt execution if the app isn't correctly configured.
 if (errors.length !== 0) {
