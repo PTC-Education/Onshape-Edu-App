@@ -94,7 +94,6 @@ async function hasApplicationStorage(featureStudios){
     }
   }
   console.log(index)
-  console.log(index)
   var hasStudio = false
   var index = null
   return {
