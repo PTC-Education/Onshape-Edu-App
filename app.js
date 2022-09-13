@@ -35,7 +35,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        name: 'app-blockly-onshape',
+        name: 'api-blockly-onshape',
         sameSite: 'none',
         secure: true,
         httpOnly: true,
